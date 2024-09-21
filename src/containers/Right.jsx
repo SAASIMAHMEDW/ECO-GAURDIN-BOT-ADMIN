@@ -9,7 +9,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import { Button } from "@/components/ui/button";
+import { ModeToggle, ModeToggleMobile } from "@/components/ThemeMode";
 
 function Right() {
   return (
@@ -48,22 +57,38 @@ function Right() {
             </Sheet>
           </div>
           <div className="right-head w-full flex justify-between ">
-            <h3 className="mx-5 make-center text-pretty font-extrabold text-3xl">
+            <h3 className="mx-5 make-center text-pretty font-extrabold lg:text-3xl sm:text-xl">
               ECO GAURDIAN BOT
             </h3>
-            <div className="tabs my-3 rounded-xl h-10 mx-10 hidden lg:flex justify-around gap-5">
-              <Button className="items list-none p-3  h-10 make-center rounded-s-md">
-                Extra
-              </Button>
-              <Button className="items list-none p-3  h-10 make-center rounded-md">
-                Turtle Region
-              </Button>
-              <Button className="items list-none p-3  h-10 make-center rounded-md">
-                Large Waste
-              </Button>
-              <Button className="items list-none p-3  h-10 make-center rounded-r-md">
-                Map
-              </Button>
+            <span className="lg:hidden md:hidden sm:block">
+              <ModeToggleMobile />
+            </span>
+            <div className="flex items-center">
+              <div className="tabs my-3 rounded-xl h-10 mx-10 hidden lg:flex justify-around gap-5">
+                <Button className="items list-none p-3  h-10 make-center rounded-s-md">
+                  Extra
+                </Button>
+                <Button className="items list-none p-3  h-10 make-center rounded-md">
+                  Turtle Region
+                </Button>
+                <Button className="items list-none p-3  h-10 make-center rounded-md">
+                  Large Waste
+                </Button>
+                <Button className="items list-none p-3  h-10 make-center rounded-r-md">
+                  Map
+                </Button>
+
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <ModeToggle />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Change Theme</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             </div>
           </div>
         </div>
