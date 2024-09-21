@@ -1,9 +1,10 @@
 import "./App.css";
 import { Button } from "@/components/ui/button";
+import Main from "./containers/Main";
 function App() {
   return (
     <>
-      
+      <Main/>
     </>
   );
 }
