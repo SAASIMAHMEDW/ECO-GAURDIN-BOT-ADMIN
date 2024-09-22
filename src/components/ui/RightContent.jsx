@@ -1,23 +1,35 @@
-import React from 'react'
-import { useToast } from "../../hooks/use-toast";
-import { Button } from "@/components/ui/button";
+import React from "react";
+import RightHead from "./RightHead";
+let TabsData = [
+  {
+    label:"Extra",
+    content : "Extra content"
+  },
+  {
+    label:"Turtle Region",
+    content : "Turtle Region content"
+  },
+  {
+    label:"Large Waste",
+    content : "Large Waste content"
+  },
+  {
+    label:"Map",
+    content : "Map content"
+  },
 
-function RightContent() {
-    const { toast } = useToast();
+]
+
+function RightContent({content}) {
+    
   return (
     <>
-        {/* <Button
-            variant="outline"
-            onClick={() => {
-              toast({
-                description: "Your message has been sent.",
-              });
-            }}
-          >
-            Show Toast
-          </Button> */}
+      <div className="right-content-container h-[calc(100vh-64px)]">
+        {/* <RightHead TabsData={TabsData} /> */}
+        <img className="h-full w-full" src={content} />
+      </div>
     </>
-  )
+  );
 }
 
-export default RightContent
+export default RightContent;
