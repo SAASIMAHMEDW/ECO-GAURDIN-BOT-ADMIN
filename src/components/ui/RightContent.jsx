@@ -24,7 +24,7 @@ function RightContent({content}) {
     
   return (
     <>
-      <div className="right-content-container h-[calc(100vh-64px)]">
+      <div className="right-content-container h-[calc(100vh-64px)] w-full">
         {/* <RightHead TabsData={TabsData} /> */}
         <img className="h-full w-full" src={content} />
       </div>

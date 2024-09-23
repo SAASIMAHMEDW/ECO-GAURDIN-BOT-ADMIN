@@ -1,0 +1,88 @@
+:root {
+  --background-color: #1a1a1a;
+  --text-color: #eee;
+  --border-radius: 30px;
+}
+
+.bot__card__container {
+  width: min(370px, 100%);
+  color: var(--text-color);
+  position: relative;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.bot__card__container .bot__card__header {
+  background-color: var(--background-color);
+  width: 60%;
+  height: 70px;
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 20px;
+  padding: 10px;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+.bot__card__header div img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.bot__card__header div .bot__card__id {
+  font-weight: bold;
+}
+
+.bot__card__content {
+  background-color: var(--background-color);
+  text-align: center;
+  border-top-right-radius: var(--border-radius);
+}
+.bot__card__footer {
+  background-color: var(--background-color);
+  padding: 30px;
+  text-align: center;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.bot__card__container::before {
+  content: "";
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 70px;
+  border-bottom-left-radius: var(--border-radius);
+  box-shadow: -30px 30px 0 var(--background-color);
+}
+.bot__card__container::after {
+  /* content: "🟢🔴 Active"; */
+  background-color: var(--background-color);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 60px;
+  width: calc(40% - 10px);
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.bot__card__container.bot__active::after {
+  content: "🟢 Active";
+}
+.bot__card__footer.bot__active {
+    box-shadow: 0 10px 0 rgb(7, 255, 7);
+  }
+  .bot__card__container.bot__inactive::after {
+  content: "🔴 InActive";
+}
+.bot__card__footer.bot__inactive {
+    box-shadow: 0 10px 0 rgb(243, 3, 35);
+  }
+
+

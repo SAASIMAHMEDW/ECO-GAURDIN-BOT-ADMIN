@@ -13,12 +13,13 @@ import { ModeToggle } from "@/components/ThemeMode";
 import { Button } from "@/components/ui/button";
 import RightContent from "./RightContent";
 
-function RightHead({TabsData}) {
+function RightHead({ TabsData }) {
   let [Tab, setTab] = useState(3);
   return (
     <>
-      <div className="right-head-container h-16 flex justify-between mx-3 sticky top-0">
-        <div className="flex items-center lg:hidden">
+      <div className="right-head-container h-16 flex sticky top-0 sm:justify-between">
+        {/* mobile nav bar  */}
+        <div className="flex items-center mx-3 lg:hidden">
           <Sheet>
             <SheetTrigger>
               <RiMenuUnfoldLine color="red" size={30} />
@@ -50,32 +51,41 @@ function RightHead({TabsData}) {
           </Sheet>
         </div>
 
+        {/* tabs */}
         <div className="right-head w-full flex justify-between items-center">
           <span className="text-pretty shadow-2xl backdrop-blur-sm rounded-xl p-3">
             <h3 className="mx-5 text-purple-500 text-pretty font-extrabold lg:text-3xl md:text-xl sm:text-xl">
               ECO GAURDIAN BOT
             </h3>
           </span>
-          <div className=" lg:hidden md:hidden sm:block">
-            {/* <ModeToggleMobile /> */}
+
+          {/* mobile dark mode btn */}
+          <div className="lg:hidden md:hidden sm:block mr-3">
             <ModeToggle />
           </div>
-          <div className="flex items-center">
-            <div className="tabs my-3 rounded-xl h-10 mx-10 hidden lg:flex justify-around gap-5">
-            {
-              TabsData.map((item, index) => (
-                <Button key={index} variant="ghost" className={`items list-none p-3  h-10 make-center rounded-s-md text-black ${Tab === index ? "bg-purple-500" : "bg-white"}`} onClick={() => setTab(index)} >
+
+          <div className="hidden items-center  lg:flex">
+            <div className="tabs my-3 rounded-xl h-10 mx-10 lg:flex justify-around gap-5">
+              {TabsData.map((item, index) => (
+                <Button
+                  key={index}
+                  variant="ghost"
+                  className={`items list-none p-3  h-10 make-center rounded-s-md text-black ${
+                    Tab === index ? "bg-purple-500" : "bg-white"
+                  }`}
+                  onClick={() => setTab(index)}
+                >
                   {item.label}
                 </Button>
-              ))
-            }
+              ))}
               <ModeToggle />
             </div>
           </div>
         </div>
       </div>
+
       {/* content */}
-      <RightContent content={TabsData[Tab].content}/>
+      <RightContent content={TabsData[Tab].content} />
     </>
   );
 }
