@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import "./left.css";
+import "./Left.css";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import BotCard from "@/components/ui/BotCard";
 import {Bots} from "../assets/Data";
