@@ -3,6 +3,7 @@ import "./Right.css";
 
 import RightContent from "@/components/ui/RightContent";
 import RightHead from "@/components/ui/RightHead";
+import BotRightMap from "@/components/BotRightMap";
 
 function Right() {
   let TabsData = [
@@ -20,7 +21,7 @@ function Right() {
     },
     {
       label: "Map",
-      content: "maps-markers.jpeg",
+      content: <BotRightMap/>,
     },
   ];
   return (

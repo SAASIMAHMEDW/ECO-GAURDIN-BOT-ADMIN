@@ -1,5 +1,6 @@
 import React from "react";
 import RightHead from "./RightHead";
+import BotRightMap from "../BotRightMap";
 let TabsData = [
   {
     label:"Extra",
@@ -20,19 +21,15 @@ let TabsData = [
 
 ]
 
-import {
-  MapContainer,
-  TileLayer,
-  useMap,
-} from 'https://cdn.esm.sh/react-leaflet'
+
 
 function RightContent({content}) {
     
   return (
     <>
-      <div className="right-content-container h-[calc(100vh-64px)] w-full">
+      <div className="right-content-container flex justify-center items-center h-[calc(100vh-64px)]">
         {/* <RightHead TabsData={TabsData} /> */}
-        <img className="h-full w-full" src={content} />
+        <BotRightMap/>
       </div>
     </>
   );
