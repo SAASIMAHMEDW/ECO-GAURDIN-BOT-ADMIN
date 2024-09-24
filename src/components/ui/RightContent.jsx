@@ -27,7 +27,7 @@ function RightContent({content}) {
     
   return (
     <>
-      <div className="right-content-container flex justify-center items-center h-[calc(100vh-64px)]">
+      <div className="right-content-container">
         {/* <RightHead TabsData={TabsData} /> */}
         <BotRightMap/>
       </div>
