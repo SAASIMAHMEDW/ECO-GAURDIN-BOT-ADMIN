@@ -1,7 +1,7 @@
 import React from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { Marker, Popup } from "react-leaflet";
-
+import "leaflet/dist/leaflet.css";
 function BotRightMap() {
   return (
     <>
