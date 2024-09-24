@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "./Left.css";
@@ -8,6 +8,21 @@ import {Bots} from "../assets/Data";
 import NotificationCard from "@/components/ui/NotificationCard";
 
 function Left() {
+  let [BotsData,setBotsData] = useState([])
+  useEffect(()=>{
+    setBotsData(Bots)
+    SortBotsAccordingToStatus(Bots)
+  },[BotsData])
+  const SortBotsAccordingToStatus = (BotsData)=>{
+     let BotsActive = BotsData.filter((bot)=>{
+       return bot.status === "Active"
+     })
+     let BotsInactive = BotsData.filter((bot)=>{
+       return bot.status === "Not Active"
+     })
+     let temp = [...BotsActive,...BotsInactive]
+     setBotsData(temp)
+  }
   return (
     <>
       <div className="head hidden lg:block col-span-1">
@@ -39,7 +54,7 @@ function Left() {
               </TabsContent>
               <TabsContent value="bots">
                 {
-                  Bots.map((bot) => (
+                  BotsData.map((bot) => (
                     <BotCard key={bot.id} {...bot}/>
                   ))
                 }

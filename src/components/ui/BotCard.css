@@ -34,13 +34,13 @@
 
 .bot__card__content {
   background-color: var(--background-color);
+  width: 100%;
   text-align: center;
   border-top-right-radius: var(--border-radius);
 }
 .bot__card__footer {
   background-color: var(--background-color);
-  padding: 30px;
-  text-align: center;
+  padding: 16px;
   border-bottom-left-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
 }
@@ -76,13 +76,11 @@
   content: "🟢 Active";
 }
 .bot__card__footer.bot__active {
-    box-shadow: 0 10px 0 rgb(7, 255, 7);
-  }
-  .bot__card__container.bot__inactive::after {
+  box-shadow: 0 10px 0 rgb(7, 255, 7);
+}
+.bot__card__container.bot__inactive::after {
   content: "🔴 InActive";
 }
 .bot__card__footer.bot__inactive {
-    box-shadow: 0 10px 0 rgb(243, 3, 35);
-  }
-
-
+  box-shadow: 0 10px 0 rgb(243, 3, 35);
+}
