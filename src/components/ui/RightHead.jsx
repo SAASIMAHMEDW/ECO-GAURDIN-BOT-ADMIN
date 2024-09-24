@@ -52,7 +52,7 @@ function RightHead({ TabsData }) {
         </div>
 
         {/* tabs */}
-        <div className="right-head sticky top-0 flex h-16 w-full items-center justify-between sm:justify-between">
+        <div className="z-50 right-head sticky top-0 flex h-16 w-full backdrop-blur-md items-center justify-between sm:justify-between">
           <span className="text-pretty rounded-xl p-3 shadow-2xl backdrop-blur-sm">
             <h3 className="mx-5 text-pretty font-extrabold text-purple-500 sm:text-xl md:text-xl lg:text-3xl">
               ECO GAURDIAN BOT
