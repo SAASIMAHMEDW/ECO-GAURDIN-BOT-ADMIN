@@ -93,66 +93,157 @@ const Bots = [
 ];
 
 const BotsMarkers = [
-    {
-      id: 1,
-      name: "Turtle 1",
-      latitude: 12.8608,
-      longitude: 74.8237 
-    },
-    {
-      id: 2,
-      name: "Turtle 2",
-      latitude: 13.2107,
-      longitude: 74.7981 
-    },
-    {
-      id: 3,
-      name: "Turtle 3",
-      latitude: 12.8762,
-      longitude: 74.8382 
-    },
-    {
-      id: 4,
-      name: "Turtle 4",
-      latitude: 13.3311,
-      longitude: 74.7036 
-    },
-    {
-      id: 5,
-      name: "Turtle 5",
-      latitude: 12.8723,
-      longitude: 74.8194 
-    },
-    {
-      id: 6,
-      name: "Turtle 6",
-      latitude: 13.1799,
-      longitude: 74.7345 
-    },
-    {
-      id: 7,
-      name: "Turtle 7",
-      latitude: 12.8701,
-      longitude: 74.8475
-    },
-    {
-      id: 8,
-      name: "Turtle 8",
-      latitude: 13.0593,
-      longitude: 74.7629 
-    },
-    {
-      id: 9,
-      name: "Turtle 9",
-      latitude: 12.9261,
-      longitude: 74.8139
-    },
-    {
-      id: 10,
-      name: "Turtle 10",
-      latitude: 13.2365,
-      longitude: 74.8005 
-    }
-]
+  {
+    id: 1,
+    name: "John",
+    location: [12.866341634891002, 74.92545135665465],
+    status: "Active",
+  },
+  {
+    id: 2,
+    name: "Emily",
+    location: [12.866644958992746, 74.92500342774701],
+    status: "Not Active",
+  },
+  {
+    id: 3,
+    name: "Michael",
+    location: [12.866618810377739, 74.9258027260373],
+    status: "Active",
+  },
+  {
+    id: 4,
+    name: "Sarah",
+    location: [12.866692026492915, 74.92492832589421],
+    status: "Not Active",
+  },
+  {
+    id: 5,
+    name: "David",
+    location: [12.866257959212174, 74.92500879216506],
+    status: "Active",
+  },
+  {
+    id: 6,
+    name: "Sophia",
+    location: [12.866576972588037, 74.92454745221227],
+    status: "Not Active",
+  },
+  {
+    id: 7,
+    name: "James",
+    location: [12.865959864379526, 74.92570884872133],
+    status: "Active",
+  },
+  {
+    id: 8,
+    name: "Olivia",
+    location: [12.867161868228054, 74.92515551845982],
+    status: "Active",
+  },
+  {
+    id: 9,
+    name: "Daniel",
+    location: [12.866260081060759, 74.92469301166115],
+    status: "Not Active",
+  },
+  {
+    id: 10,
+    name: "Emma",
+    location: [12.86649641180429, 74.9244888707293],
+    status: "Active",
+  },
+];
 
-export { Bots,BotsMarkers };
+const LargeWasteLocations = [
+  {
+    id: 1,
+    name: "John",
+    location: [12.866341634891002, 74.92545135665465],
+    status: "Active",
+  },
+  {
+    id: 5,
+    name: "David",
+    location: [12.866257959212174, 74.92500879216506],
+    status: "Active",
+  },
+
+  {
+    id: 9,
+    name: "Daniel",
+    location: [12.866260081060759, 74.92469301166115],
+    status: "Not Active",
+  },
+
+];
+
+const TurtlesRegion = [
+  {
+    id: 1,
+    name: "Turtle 1",
+    latitude: 12.8608,
+    longitude: 74.8237,
+  },
+  {
+    id: 2,
+    name: "Turtle 2",
+    latitude: 13.2107,
+    longitude: 74.7981,
+  },
+  {
+    id: 3,
+    name: "Turtle 3",
+    latitude: 12.8762,
+    longitude: 74.8382,
+  },
+  {
+    id: 4,
+    name: "Turtle 4",
+    latitude: 13.3311,
+    longitude: 74.7036,
+  },
+  {
+    id: 5,
+    name: "Turtle 5",
+    latitude: 12.8723,
+    longitude: 74.8194,
+  },
+  {
+    id: 6,
+    name: "Turtle 6",
+    latitude: 13.1799,
+    longitude: 74.7345,
+  },
+  {
+    id: 7,
+    name: "Turtle 7",
+    latitude: 12.8701,
+    longitude: 74.8475,
+  },
+  {
+    id: 8,
+    name: "Turtle 8",
+    latitude: 13.0593,
+    longitude: 74.7629,
+  },
+  {
+    id: 9,
+    name: "Turtle 9",
+    latitude: 12.9261,
+    longitude: 74.8139,
+  },
+  {
+    id: 10,
+    name: "Turtle 10",
+    latitude: 13.2365,
+    longitude: 74.8005,
+  },
+];
+
+export { 
+  Bots, 
+  BotsMarkers,
+  LargeWasteLocations, 
+  TurtlesRegion 
+};
