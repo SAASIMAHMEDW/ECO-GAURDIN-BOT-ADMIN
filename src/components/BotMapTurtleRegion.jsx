@@ -2,14 +2,9 @@ import React from "react";
 import { MapContainer, TileLayer, useMap, Marker, Popup ,CircleMarker,Tooltip} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Maps.css";
-import { BotsMarkers, LargeWasteLocations } from "../assets/Data";
+import { TurtlesRegion } from "../assets/Data";
 import { Icon } from "leaflet";
-function BotRightMap() {
-  let customBotIconMarker = new Icon({
-    iconUrl: "bot-logo.png",
-    iconSize: [38, 38],
-  });
-  
+function BotMapTurtleRegion() {
   return (
     <>
       <MapContainer
@@ -19,12 +14,16 @@ function BotRightMap() {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {BotsMarkers.map((marker) => (
-          <Marker position={[...marker.location]} icon={customBotIconMarker}>
-            <Popup>{marker.name}</Popup>
-          </Marker>
+        {TurtlesRegion.map((marker) => (
+          <CircleMarker
+          center={[...marker.location]}
+          pathOptions={{ color: "gray" }}
+          radius={30}
+        >
+          <Tooltip>Turtle: {marker.name}</Tooltip>
+        </CircleMarker>
         ))}
         {/* <Marker position={[12.866799235763326, 74.92548488426597]}>
           <Popup>
@@ -36,4 +35,4 @@ function BotRightMap() {
   );
 }
 
-export default BotRightMap;
+export default BotMapTurtleRegion;

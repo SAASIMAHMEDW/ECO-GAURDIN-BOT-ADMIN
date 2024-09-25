@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import TdsCard from "@/components/ui/TdsCard";
 
 function Left() {
   let [BotsData, setBotsData] = useState([]);
@@ -111,7 +112,9 @@ function Left() {
                 ))}
               </TabsContent>
               <TabsContent value="ph_value">ph value details</TabsContent>
-              <TabsContent value="tds_value">tds details</TabsContent>
+              <TabsContent value="tds_value">
+                <TdsCard/>
+              </TabsContent>
             </ScrollArea>
           </div>
         </Tabs>

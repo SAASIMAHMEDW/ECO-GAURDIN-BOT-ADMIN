@@ -4,20 +4,23 @@ import "./Right.css";
 import RightContent from "@/components/ui/RightContent";
 import RightHead from "@/components/ui/RightHead";
 import BotRightMap from "@/components/BotRightMap";
+import BotMapLargeWaste from "@/components/BotMapLargeWaste";
+import BotMapTurtleRegion from "@/components/BotMapTurtleRegion";
+import BotMapLargeTurtleSathSath from "@/components/BotMapLargeTurtleSathSath";
 
 function Right() {
   let TabsData = [
     {
       label: "Extra",
-      content: "map-circle-2.jpg",
+      content: <BotMapLargeTurtleSathSath/>,
     },
     {
       label: "Turtle Region",
-      content: "map-circle.jpg",
+      content: <BotMapTurtleRegion/>,
     },
     {
       label: "Large Waste",
-      content: "map-circle-2.jpg",
+      content: <BotMapLargeWaste/>,
     },
     {
       label: "Map",

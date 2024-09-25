@@ -2,14 +2,13 @@ import React from "react";
 import { MapContainer, TileLayer, useMap, Marker, Popup ,CircleMarker,Tooltip} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Maps.css";
-import { BotsMarkers, LargeWasteLocations } from "../assets/Data";
+import { LargeWasteLocations } from "../assets/Data";
 import { Icon } from "leaflet";
-function BotRightMap() {
+function BotMapLargeWaste() {
   let customBotIconMarker = new Icon({
     iconUrl: "bot-logo.png",
     iconSize: [38, 38],
   });
-  
   return (
     <>
       <MapContainer
@@ -19,12 +18,16 @@ function BotRightMap() {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {BotsMarkers.map((marker) => (
-          <Marker position={[...marker.location]} icon={customBotIconMarker}>
-            <Popup>{marker.name}</Popup>
-          </Marker>
+        {LargeWasteLocations.map((marker) => (
+          <CircleMarker
+          center={[...marker.location]}
+          pathOptions={{ color: "purple" }}
+          radius={30}
+        >
+          <Tooltip>Large Waste{}</Tooltip>
+        </CircleMarker>
         ))}
         {/* <Marker position={[12.866799235763326, 74.92548488426597]}>
           <Popup>
@@ -36,4 +39,4 @@ function BotRightMap() {
   );
 }
 
-export default BotRightMap;
+export default BotMapLargeWaste;

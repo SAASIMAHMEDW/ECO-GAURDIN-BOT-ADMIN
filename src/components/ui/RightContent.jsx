@@ -29,7 +29,7 @@ function RightContent({content}) {
     <>
       <div className="right-content-container w-[calc(100vw-450px)] h-[calc(100vh-70px)] lg:col-span-3 [grid-area]">
         {/* <RightHead TabsData={TabsData} /> */}
-        <BotRightMap/>
+        {content}
       </div>
     </>
   );

@@ -175,75 +175,28 @@ const LargeWasteLocations = [
     location: [12.866260081060759, 74.92469301166115],
     status: "Not Active",
   },
-
 ];
 
 const TurtlesRegion = [
   {
     id: 1,
-    name: "Turtle 1",
-    latitude: 12.8608,
-    longitude: 74.8237,
-  },
-  {
-    id: 2,
-    name: "Turtle 2",
-    latitude: 13.2107,
-    longitude: 74.7981,
-  },
-  {
-    id: 3,
-    name: "Turtle 3",
-    latitude: 12.8762,
-    longitude: 74.8382,
-  },
-  {
-    id: 4,
-    name: "Turtle 4",
-    latitude: 13.3311,
-    longitude: 74.7036,
+    name: "John",
+    location: [12.86701576829351, 74.92522423101985],
+    status: "Active",
   },
   {
     id: 5,
-    name: "Turtle 5",
-    latitude: 12.8723,
-    longitude: 74.8194,
+    name: "David",
+    location: [12.86627219148689, 74.92519514392873],
+    status: "Active",
   },
-  {
-    id: 6,
-    name: "Turtle 6",
-    latitude: 13.1799,
-    longitude: 74.7345,
-  },
-  {
-    id: 7,
-    name: "Turtle 7",
-    latitude: 12.8701,
-    longitude: 74.8475,
-  },
-  {
-    id: 8,
-    name: "Turtle 8",
-    latitude: 13.0593,
-    longitude: 74.7629,
-  },
+
   {
     id: 9,
-    name: "Turtle 9",
-    latitude: 12.9261,
-    longitude: 74.8139,
-  },
-  {
-    id: 10,
-    name: "Turtle 10",
-    latitude: 13.2365,
-    longitude: 74.8005,
+    name: "Daniel",
+    location: [12.866322603543429, 74.92585445132728],
+    status: "Not Active",
   },
 ];
 
-export { 
-  Bots, 
-  BotsMarkers,
-  LargeWasteLocations, 
-  TurtlesRegion 
-};
+export { Bots, BotsMarkers, LargeWasteLocations, TurtlesRegion };
