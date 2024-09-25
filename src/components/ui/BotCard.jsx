@@ -1,6 +1,7 @@
 import React from "react";
 import "./BotCard.css";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
 function BotCard({
   id,
@@ -50,8 +51,9 @@ function BotCard({
           </div>
         </div>
         <hr/>
-        <div className="bot__card__footer flex justify-center items-center">
-          <div className="text-gray-400">Last updated on 2022-01-01</div>
+        <div className="bot__card__footer flex justify-between">
+          <p className="text-gray-400">Last updated on 2022-01-01</p>
+          <Button variant="disabled">Delete</Button>
         </div>
       </div>
     </>
