@@ -27,7 +27,7 @@ function RightContent({content}) {
     
   return (
     <>
-      <div className="right-content-container w-[calc(100vw-450px)] h-[calc(100vh-70px)] lg:col-span-3 [grid-area]">
+      <div className="right-content-container w-[calc(100%)] h-[calc(100vh-100px)] lg:col-span-3 [grid-area]">
         {/* <RightHead TabsData={TabsData} /> */}
         {content}
       </div>

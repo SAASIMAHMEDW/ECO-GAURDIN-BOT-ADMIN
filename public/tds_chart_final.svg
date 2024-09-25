@@ -1,0 +1,27 @@
+<svg baseProfile="tiny" height="200" version="1.2" width="600" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="a" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#8bd3ff"/>
+        <stop offset=".2" stop-color="#66c2ff"/>
+        <stop offset=".4" stop-color="#99ffa2"/>
+        <stop offset=".6" stop-color="#ffd966"/>
+        <stop offset=".8" stop-color="#ff7b66"/>
+        <stop offset="1" stop-color="#f33"/>
+      </linearGradient>
+    </defs>
+    <text fill="#ffff" font-family="Arial" font-size="18" font-weight="bold" x="20" y="30">Total Dissolved Solids (TDS) in parts per million (ppm)</text>
+    <rect fill="url(#a)" height="40" rx="10" ry="10" stroke="#333" width="520" x="20" y="60"/>
+    <text fill="#ffff" font-family="Arial" font-size="14" x="20" y="120">0</text>
+    <text fill="#ffff" font-family="Arial" font-size="14" x="106.667" y="120">50</text>
+    <text fill="#ffff" font-family="Arial" font-size="14" x="193.333" y="120">100</text>
+    <text fill="#ffff" font-family="Arial" font-size="14" x="280" y="120">200</text>
+    <text fill="#ffff" font-family="Arial" font-size="14" x="366.667" y="120">300</text>
+    <text fill="#ffff" font-family="Arial" font-size="14" x="453.333" y="120">400</text>
+    <text fill="#ffff" font-family="Arial" font-size="14" x="540" y="120">500</text>
+    <text fill="#ffff" font-family="Arial" font-size="13" font-weight="bold" x="20" y="140">Soft</text>
+    <text fill="#ffff" font-family="Arial" font-size="13" font-weight="bold" x="90" y="140">Moderately hard</text>
+    <text fill="#ffff" font-family="Arial" font-size="13" font-weight="bold" x="180" y="140">Hard</text>
+    <text fill="#ffff" font-family="Arial" font-size="13" font-weight="bold" x="320" y="140">Very hard</text>
+    <text fill="#ffff" font-family="Arial" font-size="13" font-weight="bold" x="440" y="140">Mineral water</text>
+    <path opacity=".1" d="M20 105h520v5H20z"/>
+  </svg>

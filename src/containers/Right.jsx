@@ -29,7 +29,7 @@ function Right() {
   ];
   return (
     <>
-      <div className="head w-[calc(100vw-450px)] h-[calc(100vh-70px)] lg:col-span-3">
+      <div className="head  lg:col-span-3">
         {/* <RightContent /> */}
         <RightHead TabsData={TabsData} />
       </div>
