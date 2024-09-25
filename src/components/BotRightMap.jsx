@@ -9,15 +9,15 @@ import {
   Tooltip,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { MarkerClusterGroup } from "react-leaflet-cluster";
 import "./Maps.css";
 import { BotsMarkers, LargeWasteLocations } from "../assets/Data";
-import { Icon } from "leaflet";
+import { Icon,MarkerCluster } from "leaflet";
 function BotRightMap() {
   let customBotIconMarker = new Icon({
     iconUrl: "bot-logo.png",
     iconSize: [38, 38],
   });
- 
 
   return (
     <>
@@ -31,16 +31,18 @@ function BotRightMap() {
           url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}"
           ext="jpg"
         />
-        {BotsMarkers.map((marker) => (
-          <Marker position={[...marker.location]} icon={customBotIconMarker}>
-            <Popup>{marker.name}</Popup>
-          </Marker>
-        ))}
-        {/* <Marker position={[12.866799235763326, 74.92548488426597]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker> */}
+        {/* <MarkerClusterGroup chunkedLoading> */}
+          {BotsMarkers.map((marker, index) => (
+            <Marker
+              key={index}
+              position={[...marker.location]}
+              icon={customBotIconMarker}
+              title="Bot"
+            >
+              <Popup>{marker.name}</Popup>
+            </Marker>
+          ))}
+        {/* </MarkerClusterGroup> */}
       </MapContainer>
     </>
   );
