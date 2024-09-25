@@ -9,29 +9,32 @@ import {
   Tooltip,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { MarkerClusterGroup } from "react-leaflet-cluster";
+import MarkerClusterGroup from "react-leaflet-cluster";
 import "./Maps.css";
-import { BotsMarkers, LargeWasteLocations } from "../assets/Data";
-import { Icon,MarkerCluster } from "leaflet";
+import { BotsMarkers } from "../assets/Data";
+import { Icon } from "leaflet";
 function BotRightMap() {
   let customBotIconMarker = new Icon({
     iconUrl: "bot-logo.png",
     iconSize: [38, 38],
   });
 
+  
+
   return (
     <>
       <MapContainer
         center={[12.866799235763326, 74.92548488426597]}
-        zoom={20}
-        scrollWheelZoom={false}
+        zoom={30}
+        scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}"
+          url={`https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}?api_key=${import.meta.env.VITE_STADIA_MAP_API_KEY}`}
+          // url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}"
           ext="jpg"
         />
-        {/* <MarkerClusterGroup chunkedLoading> */}
+        <MarkerClusterGroup chunkedLoading>
           {BotsMarkers.map((marker, index) => (
             <Marker
               key={index}
@@ -42,7 +45,7 @@ function BotRightMap() {
               <Popup>{marker.name}</Popup>
             </Marker>
           ))}
-        {/* </MarkerClusterGroup> */}
+        </MarkerClusterGroup>
       </MapContainer>
     </>
   );
