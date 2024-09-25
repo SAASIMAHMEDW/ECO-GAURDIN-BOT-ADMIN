@@ -16,12 +16,12 @@ function BotMapTurtleRegion() {
           attribution='&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url={`https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}?api_key=${import.meta.env.VITE_STADIA_MAP_API_KEY}`}
           // url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}"
-          ext="jpg"
+          ext="png"
         />
         {TurtlesRegion.map((marker) => (
           <CircleMarker
           center={[...marker.location]}
-          pathOptions={{ color: "gray" }}
+          pathOptions={{ color: "yellow" }}
           radius={30}
         >
           <Tooltip>Turtle: {marker.name}</Tooltip>

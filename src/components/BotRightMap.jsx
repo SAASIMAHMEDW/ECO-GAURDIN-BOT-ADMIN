@@ -25,16 +25,16 @@ function BotRightMap() {
     <>
       <MapContainer
         center={[12.866799235763326, 74.92548488426597]}
-        zoom={30}
+        zoom={20}
         scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url={`https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}?api_key=${import.meta.env.VITE_STADIA_MAP_API_KEY}`}
           // url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}"
-          ext="jpg"
+          ext="png"
         />
-        <MarkerClusterGroup chunkedLoading>
+        {/* <MarkerClusterGroup chunkedLoading> */}
           {BotsMarkers.map((marker, index) => (
             <Marker
               key={index}
@@ -45,7 +45,7 @@ function BotRightMap() {
               <Popup>{marker.name}</Popup>
             </Marker>
           ))}
-        </MarkerClusterGroup>
+        {/* </MarkerClusterGroup> */}
       </MapContainer>
     </>
   );
