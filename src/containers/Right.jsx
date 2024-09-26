@@ -7,11 +7,12 @@ import BotRightMap from "@/components/BotRightMap";
 import BotMapLargeWaste from "@/components/BotMapLargeWaste";
 import BotMapTurtleRegion from "@/components/BotMapTurtleRegion";
 import BotMapLargeTurtleSathSath from "@/components/BotMapLargeTurtleSathSath";
+import MarkerClickConnentedMap from "@/components/Maps/MarkerClickConnentedMap";
 
 function Right() {
   let TabsData = [
     {
-      label: "Extra",
+      label: "Sath Sath",
       content: <BotMapLargeTurtleSathSath/>,
     },
     {
@@ -23,8 +24,12 @@ function Right() {
       content: <BotMapLargeWaste/>,
     },
     {
-      label: "Map",
+      label: "Bot Map",
       content: <BotRightMap/>,
+    },
+    {
+      label: "Make Marker",
+      content: <MarkerClickConnentedMap/>
     },
   ];
   return (
