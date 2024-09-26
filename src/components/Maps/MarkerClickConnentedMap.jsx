@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -9,13 +9,11 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
+import { Button } from "@/components/ui/button";
+
 function MarkerClickConnectedMap() {
   // State to hold marker data as an array of objects with id, location, and draggable attributes
   const [markers, setMarkers] = useState([]);
-
-  useEffect(() => {
-    console.log(markers);
-  }, [markers]);
 
   // Function to add a new marker
   const addMarker = (location) => {
@@ -61,14 +59,29 @@ function MarkerClickConnectedMap() {
     );
   };
 
+  // Function to handle "Upload" button click
+  const handleUpload = () => {
+    const markerLocations = markers.map((marker) => marker.location);
+    console.log("Marker Locations:", markerLocations);
+  };
+
   return (
-    <>
-      {/* Map component */}
+    <div className="relative h-full w-full">
+      {/* Upload button */}
+      <Button
+        variant="default"
+        size="sm"
+        className="absolute right-[110px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+        onClick={handleUpload}
+      >
+        Upload
+      </Button>
+
       <MapContainer
         center={[12.866799235763326, 74.92548488426597]}
         zoom={20}
         scrollWheelZoom={true}
-        style={{ height: "100vh", width: "100%" }}
+        // style={{ height: "100vh", width: "100%" }}
       >
         <TileLayer
           attribution={import.meta.env.VITE_MAP_ATTRIBUTION}
@@ -82,7 +95,7 @@ function MarkerClickConnectedMap() {
         {markers.length > 1 && (
           <Polyline
             positions={markers.map((marker) => marker.location)}
-            color="blue"
+            color="purple"
           />
         )}
 
@@ -119,56 +132,65 @@ function MarkerClickConnectedMap() {
                 </span>
                 <br />
                 {!marker.draggable ? (
-                  <button
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
                     onClick={() => enableDraggable(marker.id)}
-                    style={{
-                      backgroundColor: "purple",
-                      color: "white",
-                      margin: "5px",
-                      padding: "5px",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
+                    // style={{
+                    //   backgroundColor: "purple",
+                    //   color: "white",
+                    //   margin: "5px",
+                    //   padding: "5px",
+                    //   border: "none",
+                    //   cursor: "pointer",
+                    // }}
                   >
                     Enable Drag
-                  </button>
+                  </Button>
                 ) : (
-                  <button
+                  <Button
                     onClick={() => disableDraggable(marker.id)}
-                    style={{
-                      backgroundColor: "gray",
-                      color: "white",
-                      margin: "5px",
-                      padding: "5px",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
+                    variant="secondary"
+                    size="sm"
+                    className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+                    // style={{
+                    //   backgroundColor: "gray",
+                    //   color: "white",
+                    //   margin: "5px",
+                    //   padding: "5px",
+                    //   border: "none",
+                    //   cursor: "pointer",
+                    // }}
                   >
                     Disable Drag
-                  </button>
+                  </Button>
                 )}
-                <button
+                <Button
+                  variant="destructive"
+                  size="sm"
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent map click event
                     deleteMarker(marker.id);
                   }}
-                  style={{
-                    backgroundColor: "red",
-                    color: "white",
-                    margin: "5px",
-                    padding: "5px",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
+                  className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+                  // style={{
+                  //   backgroundColor: "red",
+                  //   color: "white",
+                  //   margin: "5px",
+                  //   padding: "5px",
+                  //   border: "none",
+                  //   cursor: "pointer",
+                  // }}
                 >
                   Delete Marker
-                </button>
+                </Button>
               </div>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
-    </>
+    </div>
   );
 }
 
