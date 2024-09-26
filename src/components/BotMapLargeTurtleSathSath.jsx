@@ -17,6 +17,7 @@ function BotMapLargeTurtleSathSath() {
     iconUrl: "bot-logo.png",
     iconSize: [38, 38],
   });
+  
   return (
     <>
       <MapContainer
@@ -24,11 +25,9 @@ function BotMapLargeTurtleSathSath() {
         zoom={20}
         scrollWheelZoom={false}
       >
-         <TileLayer
-        attribution='&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          // url={`https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}?api_key=${import.meta.env.VITE_STADIA_MAP_API_KEY}`}
-          // url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}"
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        <TileLayer
+          attribution={import.meta.env.VITE_MAP_ATTRIBUTION}
+          url={import.meta.env.VITE_MAP_URL}
           ext="png"
         />
         {LargeWasteLocations.map((marker) => (

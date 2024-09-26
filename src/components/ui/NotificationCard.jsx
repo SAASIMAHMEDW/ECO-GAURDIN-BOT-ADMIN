@@ -1,11 +1,11 @@
 import React from "react";
-
+import { Button } from "@/components/ui/button";
 function NotificationCard() {
   return (
     <>
-      <div className="animated fadeIn faster inset-0 left-0 top-0 z-50 mb-3 mt-3 flex flex-col items-center justify-center space-y-4 outline-none focus:outline-none">
-        <div className="hover:shodow-lg flex flex-col rounded-2xl bg-[--background-color] p-6 text-white shadow-md">
-          <div className="flex items-center justify-between">
+      <div className="bg-card mr-4 mt-4 mb-4 ">
+        <div className="border border-gray-200 p-6 rounded-xl ">
+          <div className="flex flex-col justify-between">
             <div className="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -19,14 +19,16 @@ function NotificationCard() {
 
               <div className="ml-3 flex flex-col">
                 <div className="font-medium leading-none">Title comes Here</div>
-                <p className="mt-1 text-sm leading-none text-gray-300">
+                <p className="mt-1 text-sm leading-none ">
                   Description of notification comes here
                 </p>
               </div>
             </div>
-            <button className="flex-no-shrink ml-4 rounded-full bg-red-500 px-5 py-2 text-sm font-medium tracking-wider text-white shadow-sm transition-all hover:bg-white hover:text-black hover:shadow-lg">
+            <div className="mt-4 w-full flex justify-end">
+            <Button variant="destructive" size="sm" className="w-20">
               Delete
-            </button>
+            </Button>
+            </div>
           </div>
         </div>
       </div>

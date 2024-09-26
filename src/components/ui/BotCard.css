@@ -5,15 +5,15 @@
 }
 
 .bot__card__container {
-  width: min(370px, 100%);
-  color: var(--text-color);
+  width: max(300px, 100%);
+  /* color: var(--text-color); */
   position: relative;
   margin-bottom: 20px;
   margin-top: 20px;
 }
 
 .bot__card__container .bot__card__header {
-  background-color: var(--background-color);
+  /* background-color: var(--background-color); */
   width: 60%;
   height: 70px;
   display: grid;
@@ -33,19 +33,19 @@
 }
 
 .bot__card__content {
-  background-color: var(--background-color);
+  /* background-color: var(--background-color); */
   width: 100%;
   text-align: center;
   border-top-right-radius: var(--border-radius);
 }
 .bot__card__footer {
-  background-color: var(--background-color);
+  /* background-color: var(--background-color); */
   padding: 16px;
   border-bottom-left-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
 }
 
-.bot__card__container::before {
+/* .bot__card__container::before {
   content: "";
   background-color: transparent;
   position: absolute;
@@ -55,7 +55,7 @@
   height: 70px;
   border-bottom-left-radius: var(--border-radius);
   box-shadow: -30px 30px 0 var(--background-color);
-}
+} */
 .bot__card__container::after {
   /* content: "🟢🔴 Active"; */
   background-color: var(--background-color);

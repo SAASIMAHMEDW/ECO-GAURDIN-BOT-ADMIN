@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import TdsCard from "@/components/ui/TdsCard";
+import SoilErosionCard from "@/components/ui/SoilErosionCard";
 
 function Left() {
   let [BotsData, setBotsData] = useState([]);
@@ -52,25 +53,30 @@ function Left() {
           {" "}
           {/* border-none bg-none */}
           {/* //nav button */}
-          <TabsList className="flex h-16 justify-evenly">
-            <TabsTrigger className="h-10" value="notifications">
-              Notifications
-            </TabsTrigger>
-            <TabsTrigger className="h-10" value="bots">
-              Bots
-            </TabsTrigger>
-            <TabsTrigger className="h-10" value="ph_value">
-              PH Value
-            </TabsTrigger>
-            <TabsTrigger className="h-10" value="tds_value">
-              TDS
-            </TabsTrigger>
-          </TabsList>
+          <ScrollArea className="h-16 w-[100%] rounded-md">
+            <TabsList className="flex h-16 justify-evenly">
+              <TabsTrigger className="h-10" value="notifications">
+                Notifications
+              </TabsTrigger>
+              <TabsTrigger className="h-10" value="bots">
+                Bots
+              </TabsTrigger>
+              <TabsTrigger className="h-10" value="ph_value">
+                PH Value
+              </TabsTrigger>
+              <TabsTrigger className="h-10" value="tds_value">
+                TDS
+              </TabsTrigger>
+              <TabsTrigger className="h-10" value="soil_erosion">
+                Soil Erosion
+              </TabsTrigger>
+            </TabsList>
+          </ScrollArea>
           {/* //nav content area */}
           <div className="left__tabs__content_container h-[calc(100vh-64px)] w-[100%] overflow-y-auto">
             <ScrollArea className="h-full w-[100%] rounded-md">
               <TabsContent value="notifications">
-              <Select
+                <Select
                   onValueChange={(a) => {
                     // setSortBotsStatus(a);
                   }}
@@ -113,7 +119,10 @@ function Left() {
               </TabsContent>
               <TabsContent value="ph_value">ph value details</TabsContent>
               <TabsContent value="tds_value">
-                <TdsCard/>
+                <TdsCard />
+              </TabsContent>
+              <TabsContent value="soil_erosion">
+                <SoilErosionCard/>
               </TabsContent>
             </ScrollArea>
           </div>

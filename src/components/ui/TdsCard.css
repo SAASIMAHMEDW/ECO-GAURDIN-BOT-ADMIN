@@ -1,20 +1,110 @@
-
-:root{
-    --tds-marker-pos : 0px
-    /* --tds-marker-pos : 220px */
+:root {
+  --tds-marker-pos: 20px /* --tds-marker-pos : 220px */;
 }
 
-
-.tds__marker__container{
-    width: 100%;
-    z-index: 10;
-    margin-top: -25px;
-    position: relative;
+.tds__marker__container {
+  width: 100%;
+  z-index: 10;
+  margin-top: -25px;
+  position: relative;
 }
 
-.tds__marker{
-    position: absolute;
-    left: var(--tds-marker-pos);
-    width: 30px;
-    height: 30px;
+.tds__marker {
+  position: absolute;
+  left: var(--tds-marker-pos);
+  width: 30px;
+  height: 30px;
 }
+.tds__card__water__wave__container {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  /* background: #3586ff; */
+}
+.tds__card__water__wave__container .wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: url(wave.png);
+  background-size: 1300px 100px;
+}
+.tds__card__water__wave__container .wave.wave1 {
+  animation: wave1 20s linear infinite;
+  z-index: 1000;
+  opacity: 1;
+  animation-delay: 0s;
+  bottom: 0;
+}
+.tds__card__water__wave__container .wave.wave2 {
+    animation: wave2 15s linear infinite;
+    z-index: 999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    bottom: 10px;
+  }
+  .tds__card__water__wave__container .wave.wave3 {
+    animation: wave3 15s linear infinite;
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    bottom: 15px;
+  }
+  .tds__card__water__wave__container .wave.wave4 {
+    animation: wave4 10s linear infinite;
+    z-index: 997;
+    opacity: 0.7;
+    animation-delay: -3s;
+    bottom: 15px;
+  }
+  .tds__card__water__wave__container .wave.wave5 {
+    animation: wave5 15s linear infinite;
+    z-index: 996;
+    opacity: 0.4;
+    animation-delay: -1s;
+    bottom: 20px;
+  }
+
+@keyframes wave1 {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1000px;
+  }
+}
+@keyframes wave2 {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: -1000px;
+    }
+  }
+  @keyframes wave3 {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: 1000px;
+    }
+  }
+  @keyframes wave4 {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: -1000px;
+    }
+  }
+  @keyframes wave5 {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: 1000px;
+    }
+  }
