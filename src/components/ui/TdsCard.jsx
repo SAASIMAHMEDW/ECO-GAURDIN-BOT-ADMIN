@@ -38,11 +38,11 @@ function TdsCard() {
           </div>
 
           <div className="tds__card__water__wave__container mt-[-15px]">
-            <div className="wave wave1"></div>
-            <div className="wave wave2"></div>
-            <div className="wave wave3"></div>
-            <div className="wave wave4"></div>
-            <div className="wave wave5"></div>
+            <div className="wave wave1 bg-[url('/wave.png')]"></div>
+            <div className="wave wave2 bg-[url('/wave.png')]"></div>
+            <div className="wave wave3 bg-[url('/wave.png')]"></div>
+            <div className="wave wave4 bg-[url('/wave.png')]"></div>
+            <div className="wave wave5 bg-[url('/wave.png')]"></div>
           </div>
         </CardContent>
         {/* <CardFooter>
