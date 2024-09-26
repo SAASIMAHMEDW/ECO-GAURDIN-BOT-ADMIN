@@ -1,5 +1,4 @@
 import React from "react";
-import { Bar, BarChart } from "recharts";
 import { TrendingDown, TrendingUp } from "lucide-react";
 import { CartesianGrid, Dot, Line, LineChart } from "recharts";
 import {
