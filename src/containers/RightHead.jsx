@@ -12,6 +12,7 @@ import {
 import { ModeToggle } from "@/components/ThemeMode";
 import { Button } from "@/components/ui/button";
 import RightContent from "./RightContent";
+import {auth} from "../firebase"
 
 function RightHead({ TabsData }) {
   let [Tab, setTab] = useState(3);
@@ -27,9 +28,7 @@ function RightHead({ TabsData }) {
             <SheetContent side="left" className="w-[350px] sm:w-[300px]">
               <SheetHeader>
                 <SheetTitle>
-                  <h3 className="text-pretty text-3xl font-extrabold">
-                    STAR
-                  </h3>
+                  <h3 className="text-pretty text-3xl font-extrabold">STAR</h3>
                 </SheetTitle>
                 <SheetDescription>
                   Cleaning is not a my job, its my love.
@@ -78,7 +77,16 @@ function RightHead({ TabsData }) {
                   {item.label}
                 </Button>
               ))}
-              <ModeToggle />
+
+              <div className="mx-3 flex items-center gap-3">
+                <Button className="h-10" variant="outline" size="sm" onClick={() => {
+                  auth.signOut()
+                }}>
+                  Logout
+                </Button>
+                <ModeToggle className="h-10" />
+              </div>
+
             </div>
           </div>
         </div>

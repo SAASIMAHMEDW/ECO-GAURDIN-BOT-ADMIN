@@ -17,8 +17,9 @@ function BotMapTurtleRegion() {
           url={import.meta.env.VITE_MAP_URL}
           ext="png"
         />
-        {TurtlesRegion.map((marker) => (
+        {TurtlesRegion.map((marker, index) => (
           <CircleMarker
+          key={"TR"+index}
           center={[...marker.location]}
           pathOptions={{ color: "yellow" }}
           radius={30}

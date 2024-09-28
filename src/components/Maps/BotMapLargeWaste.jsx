@@ -21,8 +21,9 @@ function BotMapLargeWaste() {
           url={import.meta.env.VITE_MAP_URL}
           ext="png"
         />
-        {LargeWasteLocations.map((marker) => (
+        {LargeWasteLocations.map((marker,index) => (
           <CircleMarker
+          key={"LW"+index}
           center={[...marker.location]}
           pathOptions={{ color: "purple" }}
           radius={30}

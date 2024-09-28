@@ -30,8 +30,9 @@ function BotMapLargeTurtleSathSath() {
           url={import.meta.env.VITE_MAP_URL}
           ext="png"
         />
-        {LargeWasteLocations.map((marker) => (
+        {LargeWasteLocations.map((marker,index) => (
           <CircleMarker
+          key={"LW"+index}
             center={[...marker.location]}
             pathOptions={{ color: "purple" }}
             radius={30}
@@ -39,8 +40,9 @@ function BotMapLargeTurtleSathSath() {
             <Tooltip>Large Waste</Tooltip>
           </CircleMarker>
         ))}
-        {TurtlesRegion.map((marker) => (
+        {TurtlesRegion.map((marker,index) => (
           <CircleMarker
+          key={"TR"+index}
             center={[...marker.location]}
             pathOptions={{ color: "yellow" }}
             radius={30}
