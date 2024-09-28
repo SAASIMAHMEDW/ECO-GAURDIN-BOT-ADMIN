@@ -28,7 +28,7 @@ function RightHead({ TabsData }) {
               <SheetHeader>
                 <SheetTitle>
                   <h3 className="text-pretty text-3xl font-extrabold">
-                    ECO GAURDIAN BOT
+                    STAR
                   </h3>
                 </SheetTitle>
                 <SheetDescription>
@@ -55,7 +55,7 @@ function RightHead({ TabsData }) {
         <div className="right-head sticky top-0 z-50 flex h-16 w-full items-center justify-between backdrop-blur-md sm:justify-between">
           <span className="text-pretty rounded-xl p-3 shadow-2xl backdrop-blur-sm">
             <h3 className="mx-5 text-pretty font-extrabold text-purple-500 sm:text-xl md:text-xl lg:text-3xl">
-              ECO GAURDIAN BOT
+              STAR
             </h3>
           </span>
 
