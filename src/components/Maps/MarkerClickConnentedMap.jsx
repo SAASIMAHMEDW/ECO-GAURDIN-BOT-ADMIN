@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/button";
 function MarkerClickConnectedMap() {
   // State to hold marker data as an array of objects with id, location, and draggable attributes
   const [markers, setMarkers] = useState([]);
+  // State to manage marker adding mode
+  const [isAddingMarker, setIsAddingMarker] = useState(false);
 
   // Function to add a new marker
   const addMarker = (location) => {
@@ -27,8 +29,8 @@ function MarkerClickConnectedMap() {
   const enableDraggable = (id) => {
     setMarkers((prevMarkers) =>
       prevMarkers.map((marker) =>
-        marker.id === id ? { ...marker, draggable: true } : marker,
-      ),
+        marker.id === id ? { ...marker, draggable: true } : marker
+      )
     );
   };
 
@@ -36,15 +38,15 @@ function MarkerClickConnectedMap() {
   const disableDraggable = (id) => {
     setMarkers((prevMarkers) =>
       prevMarkers.map((marker) =>
-        marker.id === id ? { ...marker, draggable: false } : marker,
-      ),
+        marker.id === id ? { ...marker, draggable: false } : marker
+      )
     );
   };
 
   // Function to delete a marker
   const deleteMarker = (id) => {
     setMarkers((prevMarkers) =>
-      prevMarkers.filter((marker) => marker.id !== id),
+      prevMarkers.filter((marker) => marker.id !== id)
     );
   };
 
@@ -54,8 +56,8 @@ function MarkerClickConnectedMap() {
       prevMarkers.map((marker) =>
         marker.id === id
           ? { ...marker, location: newLocation, draggable: false }
-          : marker,
-      ),
+          : marker
+      )
     );
   };
 
@@ -63,6 +65,12 @@ function MarkerClickConnectedMap() {
   const handleUpload = () => {
     const markerLocations = markers.map((marker) => marker.location);
     console.log("Marker Locations:", markerLocations);
+    // Add further actions like sending this data to a backend if required.
+  };
+
+  // Function to toggle adding marker mode
+  const handleToggleMarkerMode = () => {
+    setIsAddingMarker((prev) => !prev);
   };
 
   return (
@@ -77,11 +85,32 @@ function MarkerClickConnectedMap() {
         Upload
       </Button>
 
+      {/* Toggle Add Marker / Exit button */}
+      {isAddingMarker ? (
+        <Button
+          variant="secondary"
+          size="sm"
+          className="absolute right-[210px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+          onClick={handleToggleMarkerMode}
+        >
+          Exit
+        </Button>
+      ) : (
+        <Button
+          variant="default"
+          size="sm"
+          className="absolute right-[210px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+          onClick={handleToggleMarkerMode}
+        >
+          Add Marker
+        </Button>
+      )}
+
       <MapContainer
         center={[12.866799235763326, 74.92548488426597]}
         zoom={20}
         scrollWheelZoom={true}
-        // style={{ height: "100vh", width: "100%" }}
+        style={{ height: "100vh", width: "100%" }}
       >
         <TileLayer
           attribution={import.meta.env.VITE_MAP_ATTRIBUTION}
@@ -89,7 +118,7 @@ function MarkerClickConnectedMap() {
           ext="png"
         />
         {/* Map event handler component */}
-        <MapEventHandler addMarker={addMarker} />
+        {isAddingMarker && <MapEventHandler addMarker={addMarker} />}
 
         {/* Render polyline connecting all markers */}
         {markers.length > 1 && (
@@ -113,14 +142,6 @@ function MarkerClickConnectedMap() {
                 ];
                 updateMarkerPosition(marker.id, newLocation);
               },
-              dragstart: () => {
-                // Once drag starts, keep marker draggable until drag ends
-                setMarkers((prevMarkers) =>
-                  prevMarkers.map((m) =>
-                    m.id === marker.id ? { ...m, draggable: true } : m,
-                  ),
-                );
-              },
             }}
           >
             <Popup>
@@ -137,14 +158,6 @@ function MarkerClickConnectedMap() {
                     size="sm"
                     className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
                     onClick={() => enableDraggable(marker.id)}
-                    // style={{
-                    //   backgroundColor: "purple",
-                    //   color: "white",
-                    //   margin: "5px",
-                    //   padding: "5px",
-                    //   border: "none",
-                    //   cursor: "pointer",
-                    // }}
                   >
                     Enable Drag
                   </Button>
@@ -154,14 +167,6 @@ function MarkerClickConnectedMap() {
                     variant="secondary"
                     size="sm"
                     className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
-                    // style={{
-                    //   backgroundColor: "gray",
-                    //   color: "white",
-                    //   margin: "5px",
-                    //   padding: "5px",
-                    //   border: "none",
-                    //   cursor: "pointer",
-                    // }}
                   >
                     Disable Drag
                   </Button>
@@ -174,14 +179,6 @@ function MarkerClickConnectedMap() {
                     deleteMarker(marker.id);
                   }}
                   className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
-                  // style={{
-                  //   backgroundColor: "red",
-                  //   color: "white",
-                  //   margin: "5px",
-                  //   padding: "5px",
-                  //   border: "none",
-                  //   cursor: "pointer",
-                  // }}
                 >
                   Delete Marker
                 </Button>

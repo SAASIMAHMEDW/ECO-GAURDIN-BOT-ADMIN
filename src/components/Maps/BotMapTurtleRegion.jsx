@@ -2,7 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, useMap, Marker, Popup ,CircleMarker,Tooltip} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Maps.css";
-import { TurtlesRegion } from "../assets/Data";
+import { TurtlesRegion } from "../../assets/Data";
 import { Icon } from "leaflet";
 function BotMapTurtleRegion() {
   return (

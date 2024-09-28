@@ -2,7 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, useMap, Marker, Popup ,CircleMarker,Tooltip} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Maps.css";
-import { LargeWasteLocations } from "../assets/Data";
+import { LargeWasteLocations } from "../../assets/Data";
 import { Icon } from "leaflet";
 function BotMapLargeWaste() {
   let customBotIconMarker = new Icon({

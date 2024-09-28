@@ -1,6 +1,4 @@
 import React from "react";
-import RightHead from "./RightHead";
-import BotRightMap from "../BotRightMap";
 let TabsData = [
   {
     label:"Extra",

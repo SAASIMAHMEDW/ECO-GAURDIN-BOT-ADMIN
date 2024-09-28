@@ -1,0 +1,45 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background and meter outline -->
+    <rect x="10" y="60" width="380" height="40" rx="20" ry="20" fill="#f0f0f0" stroke="#000" stroke-width="2"/>
+    
+    <!-- pH levels colored bands -->
+    <rect x="10" y="60" width="27.14" height="40" fill="#ff0000"/>
+    <rect x="37.14" y="60" width="27.14" height="40" fill="#ff8000"/>
+    <rect x="64.28" y="60" width="27.14" height="40" fill="#ffff00"/>
+    <rect x="91.42" y="60" width="27.14" height="40" fill="#80ff00"/>
+    <rect x="118.56" y="60" width="27.14" height="40" fill="#00ff00"/>
+    <rect x="145.7" y="60" width="27.14" height="40" fill="#00ff80"/>
+    <rect x="172.84" y="60" width="27.14" height="40" fill="#00ffff"/>
+    <rect x="199.98" y="60" width="27.14" height="40" fill="#0080ff"/>
+    <rect x="227.12" y="60" width="27.14" height="40" fill="#0000ff"/>
+    <rect x="254.26" y="60" width="27.14" height="40" fill="#8000ff"/>
+    <rect x="281.4" y="60" width="27.14" height="40" fill="#ff00ff"/>
+    <rect x="308.54" y="60" width="27.14" height="40" fill="#ff0080"/>
+    <rect x="335.68" y="60" width="27.14" height="40" fill="#ff0040"/>
+    <rect x="362.82" y="60" width="27.14" height="40" fill="#ff0000"/>
+    
+    <!-- pH labels -->
+    <text x="10" y="115" font-size="12" fill="#000">0</text>
+    <text x="37.14" y="115" font-size="12" fill="#000">1</text>
+    <text x="64.28" y="115" font-size="12" fill="#000">2</text>
+    <text x="91.42" y="115" font-size="12" fill="#000">3</text>
+    <text x="118.56" y="115" font-size="12" fill="#000">4</text>
+    <text x="145.7" y="115" font-size="12" fill="#000">5</text>
+    <text x="172.84" y="115" font-size="12" fill="#000">6</text>
+    <text x="199.98" y="115" font-size="12" fill="#000">7</text>
+    <text x="227.12" y="115" font-size="12" fill="#000">8</text>
+    <text x="254.26" y="115" font-size="12" fill="#000">9</text>
+    <text x="281.4" y="115" font-size="12" fill="#000">10</text>
+    <text x="308.54" y="115" font-size="12" fill="#000">11</text>
+    <text x="335.68" y="115" font-size="12" fill="#000">12</text>
+    <text x="362.82" y="115" font-size="12" fill="#000">13</text>
+    <text x="390" y="115" font-size="12" fill="#000">14</text>
+    
+    <!-- Indicator arrow -->
+    <polygon points="195,30 205,30 200,60" fill="#000"/>
+    <line x1="200" y1="60" x2="200" y2="100" stroke="#000" stroke-width="2"/>
+    
+    <!-- pH text -->
+    <text x="180" y="20" font-size="18" fill="#000">pH Value: 7</text>
+  </svg>
+  

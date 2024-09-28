@@ -3,9 +3,9 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "./Left.css";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import BotCard from "@/components/ui/BotCard";
+import BotCard from "@/components/LeftCards/BotCard";
 import { Bots } from "../assets/Data";
-import NotificationCard from "@/components/ui/NotificationCard";
+import NotificationCard from "@/components/LeftCards/NotificationCard";
 import {
   Select,
   SelectContent,
@@ -13,8 +13,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import TdsCard from "@/components/ui/TdsCard";
-import SoilErosionCard from "@/components/ui/SoilErosionCard";
+import TdsCard from "@/components/LeftCards/TdsCard";
+import SoilErosionCard from "@/components/LeftCards/SoilErosionCard";
+import PhValue from "@/components/LeftCards/PhValue";
 
 function Left() {
   let [BotsData, setBotsData] = useState([]);
@@ -117,7 +118,9 @@ function Left() {
                   <BotCard key={bot.id} {...bot} />
                 ))}
               </TabsContent>
-              <TabsContent value="ph_value">ph value details</TabsContent>
+              <TabsContent value="ph_value">
+                <PhValue/>
+              </TabsContent>
               <TabsContent value="tds_value">
                 <TdsCard />
               </TabsContent>

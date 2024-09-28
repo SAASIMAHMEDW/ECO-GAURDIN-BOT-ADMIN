@@ -11,7 +11,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import "./Maps.css";
-import { BotsMarkers } from "../assets/Data";
+import { BotsMarkers } from "../../assets/Data";
 import { Icon } from "leaflet";
 function BotRightMap() {
   let customBotIconMarker = new Icon({

@@ -10,7 +10,7 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Maps.css";
-import { LargeWasteLocations, TurtlesRegion } from "../assets/Data";
+import { LargeWasteLocations, TurtlesRegion } from "../../assets/Data";
 import { Icon } from "leaflet";
 function BotMapLargeTurtleSathSath() {
   let customBotIconMarker = new Icon({
