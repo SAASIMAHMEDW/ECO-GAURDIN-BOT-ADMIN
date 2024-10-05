@@ -59,8 +59,12 @@ function Login() {
     loginBtn.current.classList.toggle("hidden");
     loginLoadingBtn.current.classList.toggle("hidden");
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
-      navigate("/"); // Redirect to a protected route upon successful login
+      let res = await signInWithEmailAndPassword(auth, data.email, data.password);
+      console.log(res);
+      if (res) {
+        navigate("/home");
+      }
+      navigate("/login");
     } catch (error) {
       console.error("Authentication Error:", error.message);
       loginBtn.current.classList.toggle("hidden");

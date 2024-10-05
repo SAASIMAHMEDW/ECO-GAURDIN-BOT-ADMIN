@@ -8,15 +8,20 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Start from './Start.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Start />,
   },
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/home",
+    element: <App />,
   }
 ]);
 
