@@ -60,9 +60,9 @@ function Login() {
     loginLoadingBtn.current.classList.toggle("hidden");
     try {
       let res = await signInWithEmailAndPassword(auth, data.email, data.password);
-      console.log(res);
-      if (res) {
-        navigate("/home");
+      // console.log(res.user.uid);
+      if (res.user.uid) {
+        navigate("/home");  
       }
       navigate("/login");
     } catch (error) {
