@@ -61,7 +61,7 @@ function Login() {
     try {
       let res = await signInWithEmailAndPassword(auth, data.email, data.password);
       // console.log(res.user.uid);
-      if (res.user.uid) {
+      if (res) {
         navigate("/home");  
       }
       navigate("/login");
