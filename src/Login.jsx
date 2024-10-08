@@ -8,7 +8,6 @@ import { auth } from "./firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "./hooks/use-toast.js";
-import ButtonSkeleton from "./components/ui/ButtonSkeleton";
 
 import {
   Form,
@@ -59,18 +58,35 @@ function Login() {
     loginBtn.current.classList.toggle("hidden");
     loginLoadingBtn.current.classList.toggle("hidden");
     try {
-      let res = await signInWithEmailAndPassword(auth, data.email, data.password);
-      // console.log(res.user.uid);
-      if (res) {
-        navigate("/home");  
+      let res = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password,
+      );
+      // console.log(res);
+      if (res.user.uid != null) {
+        navigate("/home");
+        loginBtn.current.classList.toggle("hidden");
+        loginLoadingBtn.current.classList.toggle("hidden");
+        toast({
+          description: "Login Successful",
+          variant: "success",
+        });
+      } else {
+        navigate("/login");
+        loginBtn.current.classList.toggle("hidden");
+        loginLoadingBtn.current.classList.toggle("hidden");
+        toast({
+          description: "Login Failed",
+          variant: "destructive",
+        });
       }
-      navigate("/login");
     } catch (error) {
       console.error("Authentication Error:", error.message);
       loginBtn.current.classList.toggle("hidden");
       loginLoadingBtn.current.classList.toggle("hidden");
       toast({
-        description: "Login Failed"+error.message,
+        description: "Login Failed" + error.message,
         variant: "destructive",
       });
       // You can set form errors here if needed
@@ -78,7 +94,7 @@ function Login() {
   };
 
   return (
-    <div className="bg-background login__container flex h-[calc(100vh-8rem)] w-full justify-center">
+    <div className="login__container flex h-[calc(100vh-8rem)] w-full justify-center bg-background">
       <div className="login__card__container relative top-32 w-[380px]">
         <div className="login__Heading__container flex w-full justify-center">
           <button className="button" data-text="Awesome">
