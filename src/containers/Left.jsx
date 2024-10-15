@@ -119,13 +119,13 @@ function Left() {
                 ))}
               </TabsContent>
               <TabsContent value="ph_value">
-                <PhValue/>
+                <PhValue />
               </TabsContent>
               <TabsContent value="tds_value">
                 <TdsCard />
               </TabsContent>
               <TabsContent value="soil_erosion">
-                <SoilErosionCard/>
+                <SoilErosionCard />
               </TabsContent>
             </ScrollArea>
           </div>

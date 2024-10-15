@@ -12,7 +12,7 @@ import {
 import { ModeToggle } from "@/components/ThemeMode";
 import { Button } from "@/components/ui/button";
 import RightContent from "./RightContent";
-import {auth} from "../firebase"
+import { auth } from "../firebase"
 
 function RightHead({ TabsData }) {
   let [Tab, setTab] = useState(3);
@@ -69,9 +69,8 @@ function RightHead({ TabsData }) {
                 <Button
                   key={index}
                   variant="ghost"
-                  className={`items make-center h-10 list-none rounded-s-md p-3 text-black ${
-                    Tab === index ? "bg-purple-500" : "bg-white"
-                  }`}
+                  className={`items make-center h-10 list-none rounded-s-md p-3 text-black ${Tab === index ? "bg-purple-500" : "bg-white"
+                    }`}
                   onClick={() => setTab(index)}
                 >
                   {item.label}

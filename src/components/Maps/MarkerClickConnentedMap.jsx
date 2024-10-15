@@ -5,23 +5,28 @@ import {
   Marker,
   Popup,
   Polyline,
+  Rectangle,
   useMapEvents,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 import { Button } from "@/components/ui/button";
 
+import {db} from "../../firebase"
+
 function MarkerClickConnectedMap() {
-  // State to hold marker data as an array of objects with id, location, and draggable attributes
+  // State to hold marker data as an array of objects with id, latitude, longitude, and draggable attributes
   const [markers, setMarkers] = useState([]);
   // State to manage marker adding mode
   const [isAddingMarker, setIsAddingMarker] = useState(false);
+  // State to toggle polyline or rectangle (polyline is default)
+  const [showPolyline, setShowPolyline] = useState(true);
 
   // Function to add a new marker
   const addMarker = (location) => {
     setMarkers((prevMarkers) => [
       ...prevMarkers,
-      { id: prevMarkers.length + 1, location, draggable: false },
+      { id: prevMarkers.length + 1, latitude: location[0], longitude: location[1], draggable: false },
     ]);
   };
 
@@ -55,17 +60,10 @@ function MarkerClickConnectedMap() {
     setMarkers((prevMarkers) =>
       prevMarkers.map((marker) =>
         marker.id === id
-          ? { ...marker, location: newLocation, draggable: false }
+          ? { ...marker, latitude: newLocation[0], longitude: newLocation[1], draggable: false }
           : marker
       )
     );
-  };
-
-  // Function to handle "Upload" button click
-  const handleUpload = () => {
-    const markerLocations = markers.map((marker) => marker.location);
-    console.log("Marker Locations:", markerLocations);
-    // Add further actions like sending this data to a backend if required.
   };
 
   // Function to toggle adding marker mode
@@ -73,121 +71,168 @@ function MarkerClickConnectedMap() {
     setIsAddingMarker((prev) => !prev);
   };
 
-  return (
-    <div className="relative h-full w-full">
-      {/* Upload button */}
-      <Button
-        variant="default"
-        size="sm"
-        className="absolute right-[110px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
-        onClick={handleUpload}
-      >
-        Upload
-      </Button>
+  // Function to toggle between showing the polyline and rectangle
+  const handleToggleShape = () => {
+    setShowPolyline((prevShowPolyline) => !prevShowPolyline);
+  };
 
-      {/* Toggle Add Marker / Exit button */}
-      {isAddingMarker ? (
-        <Button
-          variant="secondary"
-          size="sm"
-          className="absolute right-[210px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
-          onClick={handleToggleMarkerMode}
-        >
-          Exit
-        </Button>
-      ) : (
+  // Function to calculate bounds for the rectangle
+  const calculateRectangleBounds = () => {
+    if (markers.length === 0) return null;
+
+    const latitudes = markers.map((marker) => marker.latitude);
+    const longitudes = markers.map((marker) => marker.longitude);
+
+    const minLat = Math.min(...latitudes);
+    const maxLat = Math.max(...latitudes);
+    const minLng = Math.min(...longitudes);
+    const maxLng = Math.max(...longitudes);
+
+    return [
+      [minLat, minLng],
+      [maxLat, maxLng],
+    ];
+  };
+
+  const rectangleBounds = calculateRectangleBounds();
+
+  // Function to handle "Upload" button click
+  const handleUpload = () => {
+    const markerLocations = markers.map((marker) => [marker.latitude, marker.longitude]);
+    console.log("Marker Locations:", markers);
+    // Add further actions like sending this data to a backend if required.
+  };
+
+  return (
+    <>
+      <div className="relative h-[calc(100vh-69px)] w-full">
+        {/* Upload button */}
         <Button
           variant="default"
           size="sm"
-          className="absolute right-[210px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
-          onClick={handleToggleMarkerMode}
+          className="absolute right-[110px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+          onClick={handleUpload}
         >
-          Add Marker
+          Upload
         </Button>
-      )}
 
-      <MapContainer
-        center={[12.866799235763326, 74.92548488426597]}
-        zoom={20}
-        scrollWheelZoom={true}
-        style={{ height: "100vh", width: "100%" }}
-      >
-        <TileLayer
-          attribution={import.meta.env.VITE_MAP_ATTRIBUTION}
-          url={import.meta.env.VITE_MAP_URL}
-          ext="png"
-        />
-        {/* Map event handler component */}
-        {isAddingMarker && <MapEventHandler addMarker={addMarker} />}
-
-        {/* Render polyline connecting all markers */}
-        {markers.length > 1 && (
-          <Polyline
-            positions={markers.map((marker) => marker.location)}
-            color="purple"
-          />
+        {/* Toggle Add Marker / Exit button */}
+        {isAddingMarker ? (
+          <Button
+            variant="secondary"
+            size="sm"
+            className="absolute right-[210px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+            onClick={handleToggleMarkerMode}
+          >
+            Exit
+          </Button>
+        ) : (
+          <Button
+            variant="default"
+            size="sm"
+            className="absolute right-[210px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+            onClick={handleToggleMarkerMode}
+          >
+            Add Marker
+          </Button>
         )}
 
-        {/* Render markers from state */}
-        {markers.map((marker) => (
-          <Marker
-            key={marker.id}
-            position={marker.location}
-            draggable={marker.draggable}
-            eventHandlers={{
-              dragend: (e) => {
-                const newLocation = [
-                  e.target.getLatLng().lat,
-                  e.target.getLatLng().lng,
-                ];
-                updateMarkerPosition(marker.id, newLocation);
-              },
-            }}
-          >
-            <Popup>
-              <div>
-                <span>
-                  {marker.draggable
-                    ? "Drag the marker to move it."
-                    : "Click 'Enable Drag' to move this marker."}
-                </span>
-                <br />
-                {!marker.draggable ? (
+        {/* Toggle between Polyline and Rectangle button */}
+        <Button
+          variant="default"
+          size="sm"
+          className="absolute right-[340px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+          onClick={handleToggleShape}
+        >
+          {showPolyline ? "Show Rectangle" : "Show Polyline"}
+        </Button>
+
+        <MapContainer
+          center={[12.866799235763326, 74.92548488426597]}
+          zoom={25}
+          scrollWheelZoom={false}
+          dragging={false}
+        // className="h-[calc(100vh-69px)] w-full"
+        // style={{ height: "h-[calc(100vh-69px)]", width: "100%" }}
+        >
+          <TileLayer
+            attribution={import.meta.env.VITE_MAP_ATTRIBUTION}
+            url={import.meta.env.VITE_MAP_URL}
+            ext="png"
+          />
+          {/* Map event handler component */}
+          {isAddingMarker && <MapEventHandler addMarker={addMarker} />}
+
+          {/* Conditionally render polyline or rectangle */}
+          {showPolyline && markers.length > 1 && (
+            <Polyline
+              positions={markers.map((marker) => [marker.latitude, marker.longitude])}
+              color="purple"
+            />
+          )}
+
+          {!showPolyline && rectangleBounds && (
+            <Rectangle bounds={rectangleBounds} color="green" />
+          )}
+
+          {/* Render markers from state */}
+          {markers.map((marker) => (
+            <Marker
+              key={marker.id}
+              position={[marker.latitude, marker.longitude]}
+              draggable={marker.draggable}
+              eventHandlers={{
+                dragend: (e) => {
+                  const newLocation = [e.target.getLatLng().lat, e.target.getLatLng().lng];
+                  updateMarkerPosition(marker.id, newLocation);
+                },
+              }}
+            >
+              <Popup>
+                <div>
+                  <span>
+                    {marker.draggable
+                      ? "Drag the marker to move it."
+                      : "Click 'Enable Drag' to move this marker."}
+                  </span>
+                  <br />
+                  {!marker.draggable ? (
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+                      onClick={() => enableDraggable(marker.id)}
+                    >
+                      Enable Drag
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => disableDraggable(marker.id)}
+                      variant="secondary"
+                      size="sm"
+                      className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+                    >
+                      Disable Drag
+                    </Button>
+                  )}
                   <Button
-                    variant="default"
+                    variant="destructive"
                     size="sm"
-                    className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
-                    onClick={() => enableDraggable(marker.id)}
-                  >
-                    Enable Drag
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => disableDraggable(marker.id)}
-                    variant="secondary"
-                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent map click event
+                      deleteMarker(marker.id);
+                    }}
                     className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
                   >
-                    Disable Drag
+                    Delete Marker
                   </Button>
-                )}
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={(e) => {
-                    e.stopPropagation(); // Prevent map click event
-                    deleteMarker(marker.id);
-                  }}
-                  className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
-                >
-                  Delete Marker
-                </Button>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
-    </div>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      </div>
+    </>
   );
 }
 

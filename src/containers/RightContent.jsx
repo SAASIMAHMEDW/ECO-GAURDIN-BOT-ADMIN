@@ -1,23 +1,4 @@
 import React from "react";
-let TabsData = [
-  {
-    label:"Extra",
-    content : "Extra content"
-  },
-  {
-    label:"Turtle Region",
-    content : "Turtle Region content"
-  },
-  {
-    label:"Large Waste",
-    content : "Large Waste content"
-  },
-  {
-    label:"Map",
-    content : "Map content"
-  },
-
-]
 
 function RightContent({content}) {
     

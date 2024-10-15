@@ -13,28 +13,28 @@ function Right() {
   let TabsData = [
     {
       label: "Sath Sath",
-      content: <BotMapLargeTurtleSathSath/>,
+      content: <BotMapLargeTurtleSathSath />,
     },
     {
       label: "Turtle Region",
-      content: <BotMapTurtleRegion/>,
+      content: <BotMapTurtleRegion />,
     },
     {
       label: "Large Waste",
-      content: <BotMapLargeWaste/>,
+      content: <BotMapLargeWaste />,
     },
     {
       label: "Bot Map",
-      content: <BotRightMap/>,
+      content: <BotRightMap />,
     },
     {
       label: "Make Marker",
-      content: <MarkerClickConnentedMap/>
+      content: <MarkerClickConnentedMap />
     },
   ];
   return (
     <>
-      <div className="head  lg:col-span-3">
+      <div className="head sm:col-span-1 md:col-span-1  lg:col-span-3">
         {/* <RightContent /> */}
         <RightHead TabsData={TabsData} />
       </div>

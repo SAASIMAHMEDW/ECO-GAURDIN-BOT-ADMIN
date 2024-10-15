@@ -2,19 +2,7 @@
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
-// import { getAnalytics } from "firebase/analytics";
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAT_GZN43qdyWQ0_ldXxr-TjMErqLheaO8",
-//   authDomain: "eco-gaurdian-bot.firebaseapp.com",
-//   databaseURL: "https://eco-gaurdian-bot-default-rtdb.firebaseio.com",
-//   projectId: "eco-gaurdian-bot",
-//   storageBucket: "eco-gaurdian-bot.appspot.com",
-//   messagingSenderId: "652056293938",
-//   appId: "1:652056293938:web:44a4ed6a512389f35d022b",
-//   measurementId: "G-ZPD2EVZX9D"
-// };
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
