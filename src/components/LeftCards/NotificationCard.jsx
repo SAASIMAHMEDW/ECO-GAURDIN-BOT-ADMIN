@@ -26,7 +26,7 @@ function NotificationCard() {
             </div>
             <div className="mt-4 w-full flex justify-end">
             <Button variant="destructive" size="sm" className="w-20">
-              Delete
+              Resolved
             </Button>
             </div>
           </div>

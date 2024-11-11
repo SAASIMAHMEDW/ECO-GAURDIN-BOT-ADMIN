@@ -16,7 +16,7 @@ function Start() {
     },[])
   return (
     <div>
-      
+      Loading........
     </div>
   )
 }

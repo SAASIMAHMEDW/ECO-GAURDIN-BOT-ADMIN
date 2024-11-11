@@ -57,7 +57,7 @@ function SoilErosionCard() {
           <CardTitle className="text-3xl font-bold">Soil Erosion</CardTitle>
           <CardDescription>Soil erosion is the natural process in which the topsoil of a field is carried away by physical sources such as wind and water.
           </CardDescription>
-          <CardDescription className=" text-sm font-bold flex items-center justify-end text-teal-500">
+          <CardDescription className=" text-sm font-bold flex items-center justify-end text-[#8411e9]">
             {/* <TrendingDown className="w-6 h-6 text-purple-500" /> */}
             Date of Data 
           </CardDescription>

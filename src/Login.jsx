@@ -94,99 +94,97 @@ function Login() {
   };
 
   return (
-    <div className="login__container flex h-[calc(100vh-8rem)] w-full justify-center bg-background">
-      <div className="login__card__container relative top-32 w-[380px]">
-        <div className="login__Heading__container flex w-full justify-center">
-          <button className="button" data-text="Awesome">
-            <span className="actual-text">&nbsp;STAR&nbsp;</span>
-            <span aria-hidden="true" className="hover-text">
-              &nbsp;STAR&nbsp;
-            </span>
-          </button>
-        </div>
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle className="text-3xl font-bold">Login</CardTitle>
-            <CardDescription className="text-justify">
-              <a href="" className="btn-shine">
-                Enter your credentials to login
-              </a>
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="login__card">
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-3"
-                >
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Enter your email"
-                            {...field}
-                            type="email"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Enter your Password"
-                            {...field}
-                            type="text" // change me: to password
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button
-                    ref={loginBtn}
-                    type="submit"
-                    className="block w-full bg-[#8411e9] font-bold tracking-wider hover:bg-[#5e2292]"
-                  >
-                    Login
-                  </Button>
-                  <button
-                    ref={loginLoadingBtn}
-                    className="hidden w-full rounded-sm bg-[#8411e9] px-6 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] transition duration-150 ease-in-out hover:bg-[#5e2292] hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-[#5e2292] focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:outline-none focus:ring-0 active:bg-[#8411e9] active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)]"
-                    type="button"
-                  >
-                    <div
-                      role="status"
-                      className="mr-2 inline-block h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                    ></div>
-                    Loading...
-                  </button>
-
-                  {/* <ButtonSkeleton /> */}
-                  {/* Additional commented-out code can be removed or kept as needed */}
-                </form>
-              </Form>
-            </div>
-          </CardContent>
-          <CardFooter>
-            <a href="" className="btn-shine mt-3">
-              Smart Trash Automatic Robot
-            </a>
-          </CardFooter>
-        </Card>
+    <div className="login__container flex h-screen w-full items-center justify-center bg-background px-4">
+    <div className="login__card__container w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+      <div className="login__Heading__container flex w-full justify-center mb-8">
+        <button className="button" data-text="Awesome">
+          <span className="actual-text">&nbsp;STAR&nbsp;</span>
+          <span aria-hidden="true" className="hover-text">
+            &nbsp;STAR&nbsp;
+          </span>
+        </button>
       </div>
+      <Card className="w-full">
+        <CardHeader className="text-center">
+          <CardTitle className="text-3xl font-bold">Login</CardTitle>
+          <CardDescription className="text-justify">
+            <a className="btn-shine">
+              Enter your credentials to login
+            </a>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="login__card">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-3"
+              >
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter your email"
+                          {...field}
+                          type="email"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter your Password"
+                          {...field}
+                          type="password" // changed to password
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  ref={loginBtn}
+                  type="submit"
+                  className="block w-full bg-[#8411e9] font-bold tracking-wider hover:bg-[#5e2292]"
+                >
+                  Login
+                </Button>
+                <button
+                  ref={loginLoadingBtn}
+                  className="hidden w-full rounded-sm bg-[#8411e9] px-6 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-neutral-50 shadow-lg hover:bg-[#5e2292] focus:outline-none active:bg-[#8411e9]"
+                  type="button"
+                >
+                  <div
+                    role="status"
+                    className="mr-2 inline-block h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em]"
+                  ></div>
+                  Loading...
+                </button>
+              </form>
+            </Form>
+          </div>
+        </CardContent>
+        <CardFooter className="text-center">
+          <a  className="btn-shine mt-3">
+            Smart Trash Automatic Robot
+          </a>
+        </CardFooter>
+      </Card>
     </div>
+  </div>
+  
   );
 }
 

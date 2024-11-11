@@ -1,6 +1,6 @@
-:root {
-  --tds-marker-pos: 20px /* --tds-marker-pos : 220px */;
-}
+/* :root {
+  --tds-marker-pos: 100px ;
+} */
 
 .tds__marker__container {
   width: 100%;
@@ -9,12 +9,12 @@
   position: relative;
 }
 
-.tds__marker {
+/* .tds__marker {
   position: absolute;
   left: var(--tds-marker-pos);
   width: 30px;
   height: 30px;
-}
+} */
 .tds__card__water__wave__container {
   width: 100%;
   height: 100px;

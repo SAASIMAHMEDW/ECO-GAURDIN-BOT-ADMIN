@@ -26,8 +26,8 @@ function BotMapLargeTurtleSathSath() {
         scrollWheelZoom={false}
       >
         <TileLayer
-          attribution={import.meta.env.VITE_MAP_ATTRIBUTION}
-          url={import.meta.env.VITE_MAP_URL}
+          attribution={import.meta.env.VITE_STADIA_MAP_ATTRIBUTION}
+          url={import.meta.env.VITE_STADIA_MAP_URL}
           ext="png"
         />
         {LargeWasteLocations.map((marker,index) => (

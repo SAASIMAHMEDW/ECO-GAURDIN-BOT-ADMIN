@@ -1,9 +1,13 @@
-:root {
+/* :root {
     --ph-marker-pos: 20px;
-    /* --tds-marker-pos: 290px; */
-  }
-  
-  .tds__marker__container {
+    /* --tds-marker-pos: 290px; 
+    
+}
+    */
+
+
+  /* phvalue__conatiner */
+  /* .tds__marker__container {
     width: 100%;
     z-index: 10;
     margin-top: -25px;
@@ -15,4 +19,4 @@
     left: var(--ph-marker-pos);
     width: 30px;
     height: 30px;
-  }
+  } */

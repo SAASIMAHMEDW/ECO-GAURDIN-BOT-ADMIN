@@ -82,13 +82,15 @@ function Left() {
                     // setSortBotsStatus(a);
                   }}
                 >
-                  <SelectTrigger className="mt-3 w-[180px]">
+                  <SelectTrigger className="mt-3 w-[280px]">
                     <SelectValue placeholder="Sort" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="All">All</SelectItem>
-                    <SelectItem value="x1">X1</SelectItem>
-                    <SelectItem value="x2">x2</SelectItem>
+                    <SelectItem value="Resolved">Resolved</SelectItem>
+                    <SelectItem value="Unresolved">Unresolved</SelectItem>
+                    <SelectItem value="resolved_then_unresolved">Resolved Then Unresolved</SelectItem>
+                    <SelectItem value="unresolved_then_resolved">Unresolved Then Resolved</SelectItem>
                   </SelectContent>
                 </Select>
                 <NotificationCard />
