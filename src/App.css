@@ -5,3 +5,18 @@
     z-index: 100;
 }
 
+
+/* Customize scrollbar appearance */
+.scrollbar-thin::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #a0aec0; /* Customize color */
+    border-radius: 4px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background-color: #edf2f7; /* Customize track color */
+  }
+  

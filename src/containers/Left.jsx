@@ -54,25 +54,26 @@ function Left() {
           {" "}
           {/* border-none bg-none */}
           {/* //nav button */}
-          <ScrollArea className="h-16 w-[100%] rounded-md">
-            <TabsList className="flex h-16 justify-evenly">
-              <TabsTrigger className="h-10" value="notifications">
+          <ScrollArea className="h-auto w-full rounded-md"  hideScrollBar={true}>
+            <TabsList className="flex h-16 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400">
+              <TabsTrigger className="h-10 min-w-max px-4" value="notifications">
                 Notifications
               </TabsTrigger>
-              <TabsTrigger className="h-10" value="bots">
+              <TabsTrigger className="h-10 min-w-max px-4" value="bots">
                 Bots
               </TabsTrigger>
-              <TabsTrigger className="h-10" value="ph_value">
+              <TabsTrigger className="h-10 min-w-max px-4" value="ph_value">
                 PH Value
               </TabsTrigger>
-              <TabsTrigger className="h-10" value="tds_value">
+              <TabsTrigger className="h-10 min-w-max px-4" value="tds_value">
                 TDS
               </TabsTrigger>
-              <TabsTrigger className="h-10" value="soil_erosion">
+              <TabsTrigger className="h-10 min-w-max px-4" value="soil_erosion">
                 Soil Erosion
               </TabsTrigger>
             </TabsList>
           </ScrollArea>
+
           {/* //nav content area */}
           <div className="left__tabs__content_container h-[calc(100vh-64px)] w-[100%] overflow-y-auto">
             <ScrollArea className="h-full w-[100%] rounded-md">

@@ -14,6 +14,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
 
 function SoilErosionCard() {
   const chartData = [
@@ -50,6 +53,106 @@ function SoilErosionCard() {
     },
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const docRef = doc(db, "INFORMATIONS", "STAR_ML");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setData(data.SOIL_EROSION);
+        console.log(data.SOIL_EROSION);
+        setIsLoading(false);
+      } else {
+        console.log("No such document!");
+        setError("No such document!");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (error) {
+    return (<>
+      /* From Uiverse.io by hoshikawamaki */
+      <div
+        class="absolute z-50 flex w-3/4 h-24 overflow-hidden bg-white shadow-lg max-w-96 rounded-xl"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" height="96" width="16">
+          <path
+            stroke-linecap="round"
+            stroke-width="2"
+            stroke="indianred"
+            fill="indianred"
+            d="M 8 0 
+               Q 4 4.8, 8 9.6 
+               T 8 19.2 
+               Q 4 24, 8 28.8 
+               T 8 38.4 
+               Q 4 43.2, 8 48 
+               T 8 57.6 
+               Q 4 62.4, 8 67.2 
+               T 8 76.8 
+               Q 4 81.6, 8 86.4 
+               T 8 96 
+               L 0 96 
+               L 0 0 
+               Z"
+          ></path>
+        </svg>
+        <div class="mx-2.5 overflow-hidden w-full">
+          <p
+            class="mt-1.5 text-xl font-bold text-[indianred] leading-8 mr-3 overflow-hidden text-ellipsis whitespace-nowrap"
+          >
+            Error !
+          </p>
+          <p class="overflow-hidden leading-5 break-all text-zinc-400 max-h-10">
+            Oh no!<br />
+            {error}.
+          </p>
+        </div>
+        <button class="w-16 cursor-pointer focus:outline-none">
+          <svg
+            class="w-7 h-7"
+            fill="none"
+            stroke="indianred"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+    </>
+    )
+  }
+
+  if (isLoading) {
+    return (<>
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex flex-row gap-2">
+          <div className="w-4 h-4 rounded-full bg-[#8411e9] animate-bounce"></div>
+          <div
+            className="w-4 h-4 rounded-full bg-[#8411e9] animate-bounce [animation-delay:-.3s]"
+          ></div>
+          <div
+            className="w-4 h-4 rounded-full bg-[#8411e9] animate-bounce [animation-delay:-.5s]"
+          ></div>
+        </div>
+      </div>
+    </>
+    )
+  }
+
   return (
     <>
       <Card>
@@ -59,7 +162,7 @@ function SoilErosionCard() {
           </CardDescription>
           <CardDescription className=" text-sm font-bold flex items-center justify-end text-[#8411e9]">
             {/* <TrendingDown className="w-6 h-6 text-purple-500" /> */}
-            Date of Data 
+            Date of Data
           </CardDescription>
         </CardHeader>
         <CardContent>
