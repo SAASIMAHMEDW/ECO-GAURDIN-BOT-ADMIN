@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 
 function BotCard({
   id,
-  name,
-  batteryPercentage,
-  batteryTemperature,
+  name="star",
+  batteryPercentage="69",
+  batteryTemperature="79",
   latitude,
   longitude,
-  status,
+  status="Active",
 }) {
   return (
     <>
