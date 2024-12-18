@@ -8,14 +8,14 @@ function BotMapTurtleRegion() {
   return (
     <>
       <MapContainer
-        center={[12.866799235763326, 74.92548488426597]}
+        center={[parseFloat(import.meta.env.VITE_MAP_CENTER_POINTS_ONE),parseFloat(import.meta.env.VITE_MAP_CENTER_POINTS_TWO)]}
         zoom={20}
         scrollWheelZoom={false}
       >
          <TileLayer
         attribution={import.meta.env.VITE_STADIA_MAP_ATTRIBUTION}
         url={import.meta.env.VITE_STADIA_MAP_URL}
-          ext="png"
+        ext={import.meta.env.VITE_STADIA_MAP_EXT}
         />
         {TurtlesRegion.map((marker, index) => (
           <CircleMarker

@@ -12,7 +12,9 @@ import {
 import { ModeToggle } from "@/components/ThemeMode";
 import { Button } from "@/components/ui/button";
 import RightContent from "./RightContent";
-import { auth } from "../firebase"
+import { auth } from "../firebase";
+import GpsLock from "@/components/mini/GpsLock";
+import Weather from "@/components/mini/Weather";
 
 function RightHead({ TabsData }) {
   let [Tab, setTab] = useState(3);
@@ -62,15 +64,18 @@ function RightHead({ TabsData }) {
           <div className="mr-3 sm:block md:hidden lg:hidden">
             <ModeToggle />
           </div>
-
+            <Weather/>
           <div className="hidden items-center lg:flex">
+          <GpsLock />
             <div className="tabs mx-10 my-3 h-10 justify-around gap-5 rounded-xl lg:flex">
+            
               {TabsData.map((item, index) => (
                 <Button
                   key={index}
                   variant="ghost"
-                  className={`items make-center h-10 list-none rounded-s-md p-3 text-black ${Tab === index ? "bg-purple-500" : "bg-white"
-                    }`}
+                  className={`items make-center h-10 list-none rounded-s-md p-3 text-black ${
+                    Tab === index ? "bg-purple-500" : "bg-white"
+                  }`}
                   onClick={() => setTab(index)}
                 >
                   {item.label}
@@ -78,14 +83,18 @@ function RightHead({ TabsData }) {
               ))}
 
               <div className="mx-3 flex items-center gap-3">
-                <Button className="h-10" variant="outline" size="sm" onClick={() => {
-                  auth.signOut()
-                }}>
+                <Button
+                  className="h-10"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    auth.signOut();
+                  }}
+                >
                   Logout
                 </Button>
                 <ModeToggle className="h-10" />
               </div>
-
             </div>
           </div>
         </div>

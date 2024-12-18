@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -11,76 +11,97 @@ import {
 import "leaflet/dist/leaflet.css";
 
 import { Button } from "@/components/ui/button";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-import { rdb } from "../../firebase";
-import { ref, onValue, set, off } from "firebase/database";
+import { db } from "../../firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  setDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
-function MarkerClickConnectedMap() {
+function MarkerClickConnectedMapDummy() {
+  // State to hold marker data
   const [markers, setMarkers] = useState([]);
+  // State to manage marker adding mode
   const [isAddingMarker, setIsAddingMarker] = useState(false);
+  // State to toggle polyline or rectangle (polyline is default)
   const [showPolyline, setShowPolyline] = useState(true);
+  // State to track if there are unsaved changes
   const [hasChanges, setHasChanges] = useState(false);
+  // State to manage loading status
   const [loading, setLoading] = useState(true);
 
-  const markersRef = ref(rdb, "MAP_MARKER_LOCATIONS");
+  const markersCollectionRef = collection(db, "MARKERS"); //  "markers" collection name
 
+  // Fetch markers from Firestore on component mount
   useEffect(() => {
-      const unsubscribe = onValue(markersRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          const fetchedMarkers = data.latitude.map((lat, index) => ({
-            id: index.toString(),
-            latitude: lat,
-            longitude: data.longitude[index],
+    const fetchMarkers = async () => {
+      try {
+        const querySnapshot = await getDocs(markersCollectionRef);
+        const fetchedMarkers = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          fetchedMarkers.push({
+            id: doc.id, // Use Firestore document ID
+            latitude: data.latitude,
+            longitude: data.longitude,
             draggable: false,
-          }));
-          setMarkers(fetchedMarkers);
-        } else {
-          setMarkers([]);
-        }
+          });
+        });
+        setMarkers(fetchedMarkers);
+      } catch (error) {
+        console.error("Error fetching markers:", error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
 
-    return ()=> {off(markersRef)}
+    fetchMarkers();
   }, []);
 
-  const addMarker = useCallback((location) => {
+  // Function to add a new marker
+  const addMarker = (location) => {
     const newMarker = {
-      id: Date.now().toString(),
+      id: Date.now().toString(), // Temporary ID; Firestore will generate a real ID on upload
       latitude: location[0],
       longitude: location[1],
       draggable: false,
     };
     setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
     setHasChanges(true);
-  }, []);
+  };
 
-  const enableDraggable = useCallback((id) => {
+  // Function to enable draggable state of a marker
+  const enableDraggable = (id) => {
     setMarkers((prevMarkers) =>
       prevMarkers.map((marker) =>
         marker.id === id ? { ...marker, draggable: true } : marker
       )
     );
     setHasChanges(true);
-  }, []);
+  };
 
-  const disableDraggable = useCallback((id) => {
+  // Function to disable draggable state of a marker
+  const disableDraggable = (id) => {
     setMarkers((prevMarkers) =>
       prevMarkers.map((marker) =>
         marker.id === id ? { ...marker, draggable: false } : marker
       )
     );
     setHasChanges(true);
-  }, []);
+  };
 
-  const deleteMarker = useCallback((id) => {
+  // Function to delete a marker
+  const deleteMarker = (id) => {
     setMarkers((prevMarkers) => prevMarkers.filter((marker) => marker.id !== id));
     setHasChanges(true);
-  }, []);
+  };
 
-  const updateMarkerPosition = useCallback((id, newLocation) => {
+  // Function to update marker location after dragging
+  const updateMarkerPosition = (id, newLocation) => {
     setMarkers((prevMarkers) =>
       prevMarkers.map((marker) =>
         marker.id === id
@@ -89,17 +110,20 @@ function MarkerClickConnectedMap() {
       )
     );
     setHasChanges(true);
-  }, []);
+  };
 
-  const handleToggleMarkerMode = useCallback(() => {
+  // Function to toggle adding marker mode
+  const handleToggleMarkerMode = () => {
     setIsAddingMarker((prev) => !prev);
-  }, []);
+  };
 
-  const handleToggleShape = useCallback(() => {
+  // Function to toggle between showing the polyline and rectangle
+  const handleToggleShape = () => {
     setShowPolyline((prevShowPolyline) => !prevShowPolyline);
-  }, []);
+  };
 
-  const rectangleBounds = useMemo(() => {
+  // Function to calculate bounds for the rectangle
+  const calculateRectangleBounds = () => {
     if (markers.length === 0) return null;
 
     const latitudes = markers.map((marker) => marker.latitude);
@@ -114,30 +138,48 @@ function MarkerClickConnectedMap() {
       [minLat, minLng],
       [maxLat, maxLng],
     ];
-  }, [markers]);
+  };
 
-  const handleUpload = useCallback(async () => {
+  const rectangleBounds = calculateRectangleBounds();
+
+  // Function to handle "Upload" button click
+  const handleUpload = async () => {
     try {
       if (markers.length === 0) {
-        toast.error("No markers to upload.");
+        // If no markers, optionally delete the collection or handle accordingly
+        // Firestore doesn't support deleting collections directly; you'd need to delete documents individually
+        // Here, we'll skip deletion for simplicity
+        console.log("No markers to upload.");
         return;
       }
 
-      const latitudes = markers.map((marker) => marker.latitude);
-      const longitudes = markers.map((marker) => marker.longitude);
+      // Option 1: Clear existing markers and add all current markers
+      // Note: Firestore doesn't support bulk deletes; you'd need to iterate and delete each document
+      // For simplicity, we'll assume you want to overwrite existing markers
 
-      await set(markersRef, {
-        latitude: latitudes,
-        longitude: longitudes,
-      });
+      // First, delete existing markers
+      const existingMarkersSnapshot = await getDocs(markersCollectionRef);
+      const deletePromises = existingMarkersSnapshot.docs.map((doc) => deleteDoc(doc.ref));
+      await Promise.all(deletePromises);
 
-      toast.success("Markers successfully uploaded.");
+      // Then, add current markers
+      const addPromises = markers.map((marker) =>
+        addDoc(markersCollectionRef, {
+          latitude: marker.latitude,
+          longitude: marker.longitude,
+        })
+      );
+      await Promise.all(addPromises);
+
+      console.log("Markers successfully uploaded.");
       setHasChanges(false);
-      setIsAddingMarker(false); // Automatically exit marker mode after upload
     } catch (error) {
-      toast.error("Error uploading markers: " + error.message);
+      console.error("Error uploading markers:", error);
     }
-  }, [markers, markersRef]);
+  };
+
+  // Optionally, handle initial upload if no markers exist
+  // This depends on your specific requirements
 
   if (loading) {
     return <div>Loading map...</div>;
@@ -145,6 +187,7 @@ function MarkerClickConnectedMap() {
 
   return (
     <div className="relative h-[calc(100vh-69px)] w-full">
+      {/* Conditionally render Upload button */}
       {hasChanges && markers.length > 0 && (
         <Button
           variant="default"
@@ -156,6 +199,7 @@ function MarkerClickConnectedMap() {
         </Button>
       )}
 
+      {/* Toggle Add Marker / Exit button */}
       {isAddingMarker ? (
         <Button
           variant="secondary"
@@ -176,22 +220,21 @@ function MarkerClickConnectedMap() {
         </Button>
       )}
 
-      {markers.length > 0 && (
-        <Button
-          variant="default"
-          size="sm"
-          className="absolute right-[340px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
-          onClick={handleToggleShape}
-        >
-          {showPolyline ? "Show Rectangle" : "Show Polyline"}
-        </Button>
-      )}
+      {/* Toggle between Polyline and Rectangle button */}
+      <Button
+        variant="default"
+        size="sm"
+        className="absolute right-[340px] top-[10px] z-[1000] h-10 cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
+        onClick={handleToggleShape}
+      >
+        {showPolyline ? "Show Rectangle" : "Show Polyline"}
+      </Button>
 
       <MapContainer
         center={[parseFloat(import.meta.env.VITE_MAP_CENTER_POINTS_ONE),parseFloat(import.meta.env.VITE_MAP_CENTER_POINTS_TWO)]}
-        zoom={20}
-        scrollWheelZoom={false}
-        dragging={false}
+        zoom={20} // Adjust zoom level as needed
+        scrollWheelZoom={false} // Allow scroll zoom
+        dragging={false} // Allow dragging
         className="h-full w-full"
       >
         <TileLayer
@@ -199,8 +242,10 @@ function MarkerClickConnectedMap() {
           url={import.meta.env.VITE_STADIA_MAP_URL}
           ext={import.meta.env.VITE_STADIA_MAP_EXT}
         />
-        {isAddingMarker && <MapEventHandler addMarker={addMarker} markers={markers} />}
+        {/* Map event handler component */}
+        {isAddingMarker && <MapEventHandler addMarker={addMarker} />}
 
+        {/* Conditionally render polyline or rectangle */}
         {showPolyline && markers.length > 1 && (
           <Polyline
             positions={markers.map((marker) => [marker.latitude, marker.longitude])}
@@ -212,6 +257,7 @@ function MarkerClickConnectedMap() {
           <Rectangle bounds={rectangleBounds} color="green" />
         )}
 
+        {/* Render markers from state */}
         {markers.map((marker) => (
           <Marker
             key={marker.id}
@@ -255,7 +301,7 @@ function MarkerClickConnectedMap() {
                   variant="destructive"
                   size="sm"
                   onClick={(e) => {
-                    e.stopPropagation();
+                    e.stopPropagation(); // Prevent map click event
                     deleteMarker(marker.id);
                   }}
                   className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
@@ -267,27 +313,20 @@ function MarkerClickConnectedMap() {
           </Marker>
         ))}
       </MapContainer>
-      <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar />
     </div>
   );
 }
 
-function MapEventHandler({ addMarker, markers }) {
+// Separate component to handle map events
+function MapEventHandler({ addMarker }) {
   useMapEvents({
     click(e) {
-      const clickedLat = e.latlng.lat;
-      const clickedLng = e.latlng.lng;
-      const isExistingMarker = markers.some(
-        (marker) => marker.latitude === clickedLat && marker.longitude === clickedLng
-      );
-
-      if (!isExistingMarker) {
-        addMarker([clickedLat, clickedLng]);
-      }
+      // Add new marker to the state with clicked location
+      addMarker([e.latlng.lat, e.latlng.lng]);
     },
   });
 
-  return null;
+  return null; // This component doesn't render anything visually
 }
 
-export default MarkerClickConnectedMap;
+export default MarkerClickConnectedMapDummy;

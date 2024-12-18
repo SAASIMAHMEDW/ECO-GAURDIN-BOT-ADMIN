@@ -8,6 +8,7 @@ import { auth } from "./firebase";
 import { useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   let navigate = useNavigate();
@@ -36,6 +37,7 @@ function App() {
         {/* <Login/> */}
         <Toaster />
       </ThemeProvider>
+      {/* <ToastContainer /> */}
     </>
   );
 }
