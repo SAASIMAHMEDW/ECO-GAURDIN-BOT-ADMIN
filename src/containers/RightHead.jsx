@@ -12,12 +12,14 @@ import {
 import { ModeToggle } from "@/components/ThemeMode";
 import { Button } from "@/components/ui/button";
 import RightContent from "./RightContent";
-import { auth } from "../firebase";
 import GpsLock from "@/components/mini/GpsLock";
 import Weather from "@/components/mini/Weather";
+import { useAuthContext } from "@/context/auth/useAuthContext";
 
 function RightHead({ TabsData }) {
   let [Tab, setTab] = useState(3);
+  const { logout } = useAuthContext();
+
   return (
     <>
       <div className="right-head-container">
@@ -64,11 +66,10 @@ function RightHead({ TabsData }) {
           <div className="mr-3 sm:block md:hidden lg:hidden">
             <ModeToggle />
           </div>
-            <Weather/>
+          <Weather />
           <div className="hidden items-center lg:flex">
-          <GpsLock />
+            <GpsLock />
             <div className="tabs mx-10 my-3 h-10 justify-around gap-5 rounded-xl lg:flex">
-            
               {TabsData.map((item, index) => (
                 <Button
                   key={index}
@@ -87,9 +88,7 @@ function RightHead({ TabsData }) {
                   className="h-10"
                   variant="outline"
                   size="sm"
-                  onClick={() => {
-                    auth.signOut();
-                  }}
+                  onClick={logout}
                 >
                   Logout
                 </Button>

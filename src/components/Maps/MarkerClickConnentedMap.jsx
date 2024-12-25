@@ -9,43 +9,46 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-
 import { Button } from "@/components/ui/button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { rdb } from "../../firebase";
 import { ref, onValue, set, off } from "firebase/database";
+import { Loader1, Loader2 } from "../magics/Loader";
 
 function MarkerClickConnectedMap() {
   const [markers, setMarkers] = useState([]);
   const [isAddingMarker, setIsAddingMarker] = useState(false);
-  const [showPolyline, setShowPolyline] = useState(true);
+  const [showPolyline, setShowPolyline] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const markersRef = ref(rdb, "MAP_MARKER_LOCATIONS");
 
+  // Fetch markers from Firebase on mount
   useEffect(() => {
-      const unsubscribe = onValue(markersRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          const fetchedMarkers = data.latitude.map((lat, index) => ({
-            id: index.toString(),
-            latitude: lat,
-            longitude: data.longitude[index],
-            draggable: false,
-          }));
-          setMarkers(fetchedMarkers);
-        } else {
-          setMarkers([]);
-        }
-        setLoading(false);
-      });
+    const unsubscribe = onValue(markersRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const fetchedMarkers = data.latitude.map((lat, index) => ({
+          id: index.toString(),
+          latitude: lat,
+          longitude: data.longitude[index],
+          draggable: false,
+        }));
+        setMarkers(fetchedMarkers);
+      } else {
+        setMarkers([]);
+      }
+      setLoading(false);
+    });
 
-    return ()=> {off(markersRef)}
+    return () => {
+      off(markersRef);
+    };
   }, []);
 
+  // Add marker
   const addMarker = useCallback((location) => {
     const newMarker = {
       id: Date.now().toString(),
@@ -57,29 +60,25 @@ function MarkerClickConnectedMap() {
     setHasChanges(true);
   }, []);
 
-  const enableDraggable = useCallback((id) => {
+  // Toggle draggable state of marker
+  const toggleDraggable = useCallback((id, isDraggable) => {
     setMarkers((prevMarkers) =>
       prevMarkers.map((marker) =>
-        marker.id === id ? { ...marker, draggable: true } : marker
+        marker.id === id
+          ? { ...marker, draggable: isDraggable }
+          : marker
       )
     );
     setHasChanges(true);
   }, []);
 
-  const disableDraggable = useCallback((id) => {
-    setMarkers((prevMarkers) =>
-      prevMarkers.map((marker) =>
-        marker.id === id ? { ...marker, draggable: false } : marker
-      )
-    );
-    setHasChanges(true);
-  }, []);
-
+  // Delete marker
   const deleteMarker = useCallback((id) => {
     setMarkers((prevMarkers) => prevMarkers.filter((marker) => marker.id !== id));
     setHasChanges(true);
   }, []);
 
+  // Update marker position
   const updateMarkerPosition = useCallback((id, newLocation) => {
     setMarkers((prevMarkers) =>
       prevMarkers.map((marker) =>
@@ -91,14 +90,17 @@ function MarkerClickConnectedMap() {
     setHasChanges(true);
   }, []);
 
+  // Toggle add marker mode
   const handleToggleMarkerMode = useCallback(() => {
     setIsAddingMarker((prev) => !prev);
   }, []);
 
+  // Toggle polyline/rectangle display
   const handleToggleShape = useCallback(() => {
     setShowPolyline((prevShowPolyline) => !prevShowPolyline);
   }, []);
 
+  // Calculate rectangle bounds
   const rectangleBounds = useMemo(() => {
     if (markers.length === 0) return null;
 
@@ -116,6 +118,7 @@ function MarkerClickConnectedMap() {
     ];
   }, [markers]);
 
+  // Handle upload to Firebase
   const handleUpload = useCallback(async () => {
     try {
       if (markers.length === 0) {
@@ -133,14 +136,16 @@ function MarkerClickConnectedMap() {
 
       toast.success("Markers successfully uploaded.");
       setHasChanges(false);
-      setIsAddingMarker(false); // Automatically exit marker mode after upload
+      setIsAddingMarker(false); // Exit add marker mode after upload
     } catch (error) {
       toast.error("Error uploading markers: " + error.message);
     }
-  }, [markers, markersRef]);
+  }, [markers]);
 
   if (loading) {
-    return <div>Loading map...</div>;
+    return (
+      <Loader2 text={"Loading marker map..."}/>
+    )
   }
 
   return (
@@ -188,7 +193,7 @@ function MarkerClickConnectedMap() {
       )}
 
       <MapContainer
-        center={[parseFloat(import.meta.env.VITE_MAP_CENTER_POINTS_ONE),parseFloat(import.meta.env.VITE_MAP_CENTER_POINTS_TWO)]}
+        center={[parseFloat(import.meta.env.VITE_MAP_CENTER_POINTS_ONE), parseFloat(import.meta.env.VITE_MAP_CENTER_POINTS_TWO)]}
         zoom={20}
         scrollWheelZoom={false}
         dragging={false}
@@ -237,13 +242,13 @@ function MarkerClickConnectedMap() {
                     variant="default"
                     size="sm"
                     className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"
-                    onClick={() => enableDraggable(marker.id)}
+                    onClick={() => toggleDraggable(marker.id, true)}
                   >
                     Enable Drag
                   </Button>
                 ) : (
                   <Button
-                    onClick={() => disableDraggable(marker.id)}
+                    onClick={() => toggleDraggable(marker.id, false)}
                     variant="secondary"
                     size="sm"
                     className="m-[5px] cursor-pointer border-r-8 border-none px-[15px] pb-[10px] pt-[10px] text-sm font-bold"

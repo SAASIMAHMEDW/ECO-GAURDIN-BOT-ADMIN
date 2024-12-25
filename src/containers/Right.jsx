@@ -29,12 +29,12 @@ function Right() {
     },
     {
       label: "Make Marker",
-      content: <MarkerClickConnentedMap />
+      content: <MarkerClickConnentedMap />,
     },
   ];
   return (
     <>
-      <div className="head sm:col-span-1 md:col-span-1  lg:col-span-3">
+      <div className="head sm:col-span-1 md:col-span-1 lg:col-span-3">
         {/* <RightContent /> */}
         <RightHead TabsData={TabsData} />
       </div>
