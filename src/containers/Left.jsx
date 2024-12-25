@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import NotificationTab from "@/components/LeftComponents/NotificationTab";
 import BotsTab from "@/components/LeftComponents/BotsTab";
 import PhValueTab from "@/components/LeftComponents/PhValueTab";
@@ -9,11 +9,11 @@ import SoilErosionTab from "@/components/LeftComponents/SoilErosionTab";
 
 function Left() {
   return (
-    <div className="head col-span-1 hidden lg:block h-full">
+    <div className="head col-span-1 hidden h-full lg:block">
       <Tabs defaultValue="notifications" className="h-full">
         {/* Navigation Tabs */}
         <ScrollArea className="h-auto w-full">
-          <TabsList className="flex h-16 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400">
+          <TabsList className="scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400 flex h-16 overflow-x-auto whitespace-nowrap">
             <TabsTrigger className="h-10 min-w-max px-4" value="notifications">
               Notifications
             </TabsTrigger>
@@ -30,6 +30,7 @@ function Left() {
               Soil Erosion
             </TabsTrigger>
           </TabsList>
+          <ScrollBar orientation="horizontal"></ScrollBar>
         </ScrollArea>
 
         {/* Tab Content */}

@@ -1,26 +1,18 @@
-@keyframes wave1 {
-  0% { background-position-x: 0; }
-  100% { background-position-x: 1000px; }
+.tds__img {
+  position: relative;
+  margin-top: 10px;
 }
 
-@keyframes wave2 {
-  0% { background-position-x: 0; }
-  100% { background-position-x: -1000px; }
+.too-high-label {
+  font-size: 1.25rem; /* Adjust font size as needed */
+  color: #e3342f; /* Red color for "Too High" */
+  text-align: center;
 }
 
-@keyframes wave3 {
-  0% { background-position-x: 0; }
-  100% { background-position-x: 1000px; }
-}
 
-@keyframes wave4 {
-  0% { background-position-x: 0; }
-  100% { background-position-x: -1000px; }
-}
-
-@keyframes wave5 {
-  0% { background-position-x: 0; }
-  100% { background-position-x: 1000px; }
+.marker {
+  position: absolute;
+  transition: all 0.3s ease-in-out;
 }
 
 .animate-wave1 {
@@ -45,4 +37,49 @@
 .animate-wave5 {
   animation: wave5 15s linear infinite;
   animation-delay: -1s;
+}
+
+@keyframes wave1 {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1000px;
+  }
+}
+
+@keyframes wave2 {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: -1000px;
+  }
+}
+
+@keyframes wave3 {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1000px;
+  }
+}
+
+@keyframes wave4 {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: -1000px;
+  }
+}
+
+@keyframes wave5 {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1000px;
+  }
 }

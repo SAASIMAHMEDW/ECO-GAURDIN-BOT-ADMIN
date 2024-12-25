@@ -178,7 +178,7 @@ function Login() {
         </CardContent>
         <CardFooter className="text-center">
           <a  className="btn-shine mt-3">
-            Smart Trash Automatic Robot
+            Smart Trash Autonomous Robot
           </a>
         </CardFooter>
       </Card>

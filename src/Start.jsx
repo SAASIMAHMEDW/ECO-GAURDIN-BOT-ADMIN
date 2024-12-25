@@ -1,24 +1,18 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { auth } from './firebase';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "./context/auth/useAuthContext";
 
 function Start() {
-    let navigate = useNavigate()
-    useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-          if (user===null) {
-            navigate("/login")
-        }
-        else{
-            navigate("/home")
-        }
-        });
-    },[])
-  return (
-    <div>
-      Loading........
-    </div>
-  )
+  let navigate = useNavigate();
+  const { isAuthenticated } = useAuthContext();
+  useEffect(() => {
+    if (isAuthenticated === null) {
+      navigate("/login");
+    } else {
+      navigate("/home");
+    }
+  }, []);
+  return <div>Loading........</div>;
 }
 
-export default Start
+export default Start;

@@ -6,20 +6,20 @@ function GpsLock() {
   const [isLocked, setIsLocked] = useState(null);
 
   useEffect(() => {
-    const dbRef = ref(rdb, "GPS_LOCK/lock"); 
-    
+    const dbRef = ref(rdb, "GPS_LOCK/lock");
+
     const listener = onValue(dbRef, (snapshot) => {
       if (snapshot.exists()) {
-        setIsLocked(snapshot.val()); 
+        setIsLocked(snapshot.val());
       } else {
         console.log("No lock data available");
-        setIsLocked(null); 
+        setIsLocked(null);
       }
     });
 
     // Cleanup the listener on component unmount
     return () => {
-      off(dbRef, listener);
+      off(dbRef); // Unsubscribe from all events
     };
   }, []);
 
@@ -35,13 +35,11 @@ function GpsLock() {
     : "Loading..."; // Show a loading state before data is fetched
 
   return (
-    <>
-      <span
-        className={`text-xs font-medium px-2.5 py-1.5 rounded dark:bg-gray-700 dark:text-gray-200 ${badgeStyles}`}
-      >
-        {badgeMessage}
-      </span>
-    </>
+    <span
+      className={`text-xs font-medium px-2.5 py-1.5 rounded dark:bg-gray-700 dark:text-gray-200 ${badgeStyles}`}
+    >
+      {badgeMessage}
+    </span>
   );
 }
 
